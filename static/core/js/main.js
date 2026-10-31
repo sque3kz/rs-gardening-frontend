@@ -750,20 +750,37 @@
   }
 
   /* ---------- Generic fade-up reveals ---------- */
-  const fadeUp = (selector, opts = {}) => {
-    ScrollTrigger.batch(selector, {
-      start: 'top 88%',
-      once: true,
-      onEnter: (batch) => gsap.fromTo(batch, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1, clearProps: 'opacity,transform', ...opts }),
+  // CSS transitions (.reveal in main.css) rather than JS tweens: the browser runs them off the
+  // main thread, so they stay smooth while the page scrolls and the 3D tree renders. Elements
+  // that come into view together are staggered slightly; once done, the reveal classes are
+  // removed so each element's own hover/active styles take over again.
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.filter((entry) => entry.isIntersecting).forEach((entry, index) => {
+      const el = entry.target;
+      revealObserver.unobserve(el);
+      el.style.transitionDelay = `${index * 0.08}s`;
+      el.classList.add('is-revealed');
     });
-    gsap.set(selector, { opacity: 0 });
-  };
+  }, { rootMargin: '0px 0px -8% 0px' });
+  const fadeUp = (selector) => $$(selector).forEach((el) => {
+    el.classList.add('reveal');
+    el.addEventListener('transitionend', function done(e) {
+      if (e.target !== el || e.propertyName !== 'translate') return;
+      el.removeEventListener('transitionend', done);
+      el.classList.remove('reveal', 'is-revealed');
+      el.style.transitionDelay = '';
+    });
+    revealObserver.observe(el);
+  });
   fadeUp('.eyebrow:not(.hero__eyebrow)');
   fadeUp('.section-head__lead, .about__body, .contact__lead, .stat, .rating-card');
-  fadeUp('.service-card');
-  fadeUp('.review-card');
+  // Cards in sideways-scrolling rows (services on phones, reviews) reveal row by row, not as each
+  // card is scrolled or drifts into view from the side.
+  fadeUp($$('.services__row.is-marquee').length ? '.services__row' : '.service-card');
+  fadeUp('.reviews__rail');
   fadeUp('.contact__list li, .contact__card');
-  fadeUp('.process__step');
+  // On phones the step cards sit in a sideways row inside the sticky panel – no reveal there
+  if (!lightMotion) fadeUp('.process__step');
   fadeUp('.band .btn');
   // Phones: headings and the About paragraph rise in as whole blocks (see lightMotion above)
   if (lightMotion) fadeUp('[data-split]:not(.hero__title), [data-scrub-text]');
@@ -855,22 +872,11 @@
     });
   });
 
-  /* ---------- Marquee: speeds up and flips with scroll direction ---------- */
+  /* ---------- Marquee: speeds up and flips with scroll direction (desktop) ---------- */
   const marquee = $('[data-marquee]');
-  if (marquee && !canHover && marquee.getAnimations) {
-    // Touch screens: a CSS animation instead of a per-frame tween. Its speed is only
-    // touched when scrolling starts, stops or changes direction, not every frame.
+  if (marquee && !canHover) {
+    // Touch screens: a steady CSS loop that ignores scrolling (see .css-marquee in main.css)
     root.classList.add('css-marquee');
-    const [loop] = marquee.getAnimations();
-    let settle;
-    const setRate = (rate) => { if (loop && loop.playbackRate !== rate) loop.updatePlaybackRate(rate); };
-    ScrollTrigger.create({
-      onUpdate: (self) => {
-        setRate(self.direction * 2.5);
-        clearTimeout(settle);
-        settle = setTimeout(() => setRate(self.direction), 250);
-      },
-    });
   } else if (marquee) {
     const loop = gsap.to(marquee, { xPercent: -50, ease: 'none', duration: 32, repeat: -1 });
     loop.totalTime(loop.duration() * 100); // allow playing backwards
@@ -907,8 +913,8 @@
       return true;
     };
     const mm = gsap.matchMedia();
-    // Pin with ScrollTrigger rather than CSS sticky – sticky content visibly lags a
-    // frame behind JS-driven scrolling, which made the heading shake.
+    // Desktop pins with ScrollTrigger. Phones use CSS position: sticky instead (main.css):
+    // iOS scrolls on its own thread, so a JS pin lags behind and jumps when it lets go.
     const panel = $('.process__sticky', process);
     const pin = (distance) => ({
       trigger: panel, pin: true, start: 'top top', end: () => `+=${window.innerHeight * distance}`,
@@ -923,9 +929,10 @@
         },
       });
     });
-    // Phones: the section pins too, and the step cards (one row) glide over to each new
-    // step as the tree grows. One tween per step change rather than one per scroll frame,
-    // kept on the GPU (force3D) so it never drops back to repainting between tweens.
+    // Phones: the panel sticks via CSS while the (taller) section scrolls past, and the step
+    // cards (one row) glide over to each new step as the tree grows. One tween per step change
+    // rather than one per scroll frame, kept on the GPU (force3D) so it never drops back to
+    // repainting between tweens.
     mm.add('(max-width: 900px)', () => {
       const track = $('.process__steps', process);
       const slide = (index, duration) => gsap.to(track, {
@@ -934,7 +941,7 @@
       });
       slide(activeIndex, 0);
       ScrollTrigger.create({
-        ...pin(2.6),
+        trigger: process, start: 'top top', end: 'bottom bottom', invalidateOnRefresh: true,
         onUpdate: (self) => {
           publish(self.progress);
           if (highlightStep(self.progress)) slide(activeIndex, 0.6);
