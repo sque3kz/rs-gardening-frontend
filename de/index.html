@@ -1,0 +1,986 @@
+<!doctype html>
+
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R&amp;S Gardening · Gärten mit Liebe gestaltet</title>
+  <meta name="description" content="R&amp;S Gardening – Gartengestaltung, Garten- und Landschaftsbau, Rasenpflege und ganzjährige Gartenpflege.">
+  <meta name="theme-color" content="#0e2419">
+  <meta property="og:title" content="R&amp;S Gardening">
+  <meta property="og:description" content="Gartengestaltung, Garten- und Landschaftsbau und Gartenpflege von R&amp;S Gardening.">
+  <meta property="og:type" content="website">
+  <link rel="alternate" hreflang="sk" href="../">
+  <link rel="alternate" hreflang="en" href="../en/">
+  <link rel="alternate" hreflang="de" href="../de/">
+  
+  <link rel="icon" href="../static/core/img/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="../static/core/css/main.css">
+
+  <script>
+    document.documentElement.classList.add('js');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced-motion');
+  </script>
+  <script type="importmap">
+    { "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  
+<div class="preloader" aria-hidden="true">
+  <div class="preloader__mark">
+    <svg viewBox="0 0 64 64"><path class="preloader__leaf" d="M14 50c0-20 14-32 36-34-1 20-13 34-35 34M14 50c7-12 16-19 26-25"/></svg>
+    <span>R&amp;S Gardening</span>
+  </div>
+</div>
+
+<header class="nav" data-nav>
+  <div class="nav__inner">
+    <a href="#top" class="nav__logo" aria-label="R&amp;S Gardening – Startseite">
+      <span class="nav__logo-mark">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50c0-20 14-32 36-34-1 20-13 34-35 34" fill="currentColor"/><path d="M14 50c7-12 16-19 26-25" stroke="var(--forest-900)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      <span class="nav__logo-text">RSGardening</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Hauptnavigation">
+      <span class="nav__indicator" aria-hidden="true"></span>
+      <a href="#about" data-nav-link>Über uns</a>
+      <a href="#services" data-nav-link>Leistungen</a>
+      <a href="#process" data-nav-link>Ablauf</a>
+      <a href="#work" data-nav-link>Projekte</a>
+      <a href="#reviews" data-nav-link>Bewertungen</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a class="nav__phone" href="tel:+421918761056"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+
+</svg>
+<span>+421 918 761 056</span></a>
+      <a href="#contact" class="btn btn--sun btn--sm magnetic">Angebot</a>
+      <button class="nav__burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" data-burger>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
+  <nav aria-label="Mobile Navigation">
+    <a href="#about">Über uns</a>
+    <a href="#services">Leistungen</a>
+    <a href="#process">Ablauf</a>
+    <a href="#work">Projekte</a>
+    <a href="#reviews">Bewertungen</a>
+    <a href="#contact">Kontakt</a>
+  </nav>
+  <div class="mobile-menu__footer">
+    <a class="mobile-menu__contact mobile-menu__contact--call" href="tel:+421918761056">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+
+</svg>
+<span><strong>Rufen Sie uns an</strong><small>+421 918 761 056</small></span>
+    </a>
+    <a class="mobile-menu__contact mobile-menu__contact--mail" href="mailto:info@rsgardening.com">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 7l-10 6L2 7"/>
+
+</svg>
+<span><strong>Schreiben Sie uns</strong><small>info@rsgardening.com</small></span>
+    </a>
+  </div>
+</div>
+
+
+<main id="main">
+  
+  <section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__glow hero__glow--a"></div>
+      <div class="hero__glow hero__glow--b"></div>
+      <div class="hero__grain"></div>
+    </div>
+
+    <svg width="0" height="0" class="sr-only" aria-hidden="true">
+      <symbol id="leaf-round" viewBox="0 0 100 100"><path d="M10 90C10 40 40 10 90 10 90 60 60 90 10 90z"/><path d="M10 90L70 30" class="vein"/></symbol>
+      <symbol id="leaf-long" viewBox="0 0 100 100"><path d="M50 4C70 26 74 62 50 96 26 62 30 26 50 4z"/><path d="M50 96V18" class="vein"/></symbol>
+    </svg>
+
+    
+    <div class="hero__leaves" aria-hidden="true">
+      <div class="leaf leaf--1" data-parallax="-40" data-depth="18"><svg><use href="#leaf-round"/></svg></div>
+      <div class="leaf leaf--2" data-parallax="-80" data-depth="34"><svg><use href="#leaf-long"/></svg></div>
+      <div class="leaf leaf--3" data-parallax="-25" data-depth="12"><svg><use href="#leaf-round"/></svg></div>
+      <div class="leaf leaf--4" data-parallax="-55" data-depth="26"><svg><use href="#leaf-long"/></svg></div>
+      <div class="leaf leaf--5" data-parallax="-95" data-depth="44"><svg><use href="#leaf-round"/></svg></div>
+      <div class="leaf leaf--6" data-parallax="-30" data-depth="20"><svg><use href="#leaf-long"/></svg></div>
+    </div>
+    <div class="hero__leaves hero__leaves--front" aria-hidden="true">
+      <div class="leaf leaf--7" data-parallax="-120" data-depth="60"><svg><use href="#leaf-long"/></svg></div>
+      <div class="leaf leaf--8" data-parallax="-70" data-depth="50"><svg><use href="#leaf-round"/></svg></div>
+    </div>
+
+    <div class="hero__inner container">
+      <div class="hero__content">
+        <p class="eyebrow eyebrow--light hero__eyebrow"><span class="dot"></span> Gartenbau &amp; Gartenpflege</p>
+        <h1 class="hero__title" data-split>
+          Gärten, die mit Ihnen <em>wachsen</em>.
+        </h1>
+        <p class="hero__lead">
+          R&amp;S Gardening plant, baut und pflegt Außenbereiche, in denen Sie sich einfach wohlfühlen – von gepflegten Rasenflächen und farbenfrohen Beeten bis hin zu kompletten Gartenumgestaltungen.
+        </p>
+        <div class="hero__cta">
+          <a href="#contact" class="btn btn--sun magnetic">Kostenloses Angebot <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</a>
+          <a href="#work" class="btn btn--ghost">Unsere Projekte</a>
+        </div>
+        <ul class="hero__trust">
+          
+          <li>
+            <strong>5,0</strong>
+            <span><span class="stars" role="img" aria-label="5,0 von 5 Sternen"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+<small>Kundenbewertung</small></span>
+          </li>
+          
+          <li><strong>4+</strong><span><small>Jahre voller<br>schöner Gärten</small></span></li>
+        </ul>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__arch-line" aria-hidden="true"></div>
+        <figure class="hero__arch" data-depth="-10">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1000&h=1300&q=80&auto=format&fit=crop"
+               srcset="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=640&h=832&q=80&auto=format&fit=crop 640w, https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1000&h=1300&q=80&auto=format&fit=crop 1000w"
+               sizes="(max-width: 900px) 75vw, 440px" alt="Ein Ziegelweg, gesäumt von blühenden Sträuchern und geschnittenen Hecken" fetchpriority="high">
+        </figure>
+        <figure class="hero__inset" data-depth="-22">
+          <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=500&h=620&q=80&auto=format&fit=crop" alt="Junge Setzlinge in Töpfen">
+        </figure>
+        <div class="hero__badge hero__badge--a"><span class="hero__badge-icon">🌿</span><span><strong>Umweltfreundlich</strong><small>Torffrei &amp; biologisch</small></span></div>
+        <div class="hero__badge hero__badge--b"><span class="hero__badge-icon">✦</span><span><strong>Voll versichert</strong><small>Ordentliches, zuverlässiges Team</small></span></div>
+      </div>
+    </div>
+  </section>
+
+  
+  <div class="marquee-wrap">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" data-marquee>
+        
+        <span>Gartengestaltung</span><i>✦</i><span>Rasenpflege</span><i>✦</i><span>Bepflanzung</span><i>✦</i>
+        <span>Heckenschnitt</span><i>✦</i><span>Gartenpavillons</span><i>✦</i><span>Gartenpflege</span><i>✦</i>
+        
+        <span>Gartengestaltung</span><i>✦</i><span>Rasenpflege</span><i>✦</i><span>Bepflanzung</span><i>✦</i>
+        <span>Heckenschnitt</span><i>✦</i><span>Gartenpavillons</span><i>✦</i><span>Gartenpflege</span><i>✦</i>
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <section class="about section" id="about">
+    <div class="container about__grid">
+      <div class="about__media">
+        <figure class="about__img about__img--main" data-parallax="-8">
+          <img src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?w=1000&q=80&auto=format&fit=crop" alt="Hände in Handschuhen setzen einen jungen Setzling" loading="lazy">
+        </figure>
+        <figure class="about__img about__img--small" data-parallax="-30">
+          <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?w=700&q=80&auto=format&fit=crop" alt="Ein Gärtner bepflanzt ein Beet" loading="lazy">
+        </figure>
+        <div class="about__stamp" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <defs><path id="circlePath" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0"/></defs>
+            <text><textPath href="#circlePath">EHRLICHES HANDWERK · MIT LIEBE GEPFLEGT · </textPath></text>
+          </svg>
+          <span>R&amp;S</span>
+        </div>
+      </div>
+
+      <div class="about__content">
+        <p class="eyebrow">Über uns</p>
+        <h2 class="section-title" data-split>Ehrliches Handwerk, mit Liebe <em>gewachsen</em>.</h2>
+        <p class="about__lead" data-scrub-text>
+          R&amp;S Gardening begann als Familienbetrieb mit einer einfachen Überzeugung: Jeder Garten, ob groß oder klein, verdient Liebe. Mit derselben persönlichen Sorgfalt gehen wir heute an jedes Projekt heran. Wir planen, bauen und pflegen Orte, die zu jeder Jahreszeit aufblühen.
+        </p>
+        <p class="about__body">
+          Auch wenn wir seitdem gewachsen sind, sind unsere Werte dieselben geblieben. Wir übernehmen die komplette Umsetzung Ihres Gartens und ergänzen ihn mit Gartenhäusern aus Holz, Pavillons oder Terrassen, die Ihnen viele Jahre Freude und Komfort bereiten. Wir legen Wert auf einen freundlichen und fairen Umgang – deshalb kommen unsere Kunden gern wieder.
+        </p>
+
+        <dl class="stats">
+          <div class="stat"><dt>Jahre Erfahrung</dt><dd><span data-count="4">4</span>+</dd></div>
+          <div class="stat"><dt>Umgestaltete Gärten</dt><dd><span data-count="150">150</span>+</dd></div>
+          <div class="stat"><dt>Stammkunden</dt><dd><span data-count="95">95</span>%</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="services section section--dark" id="services">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--light">Was wir tun</p>
+        <h2 class="section-title" data-split>Alles, was Ihr Garten <em>braucht</em>.</h2>
+        <p class="section-head__lead">Vom einmaligen Aufräumen bis zur kompletten Neugestaltung übernehmen wir jeden Arbeitsschritt – damit Sie einfach das Ergebnis genießen können.</p>
+      </div>
+
+      <div class="services__grid">
+        
+        <div class="services__row" data-drag-scroll>
+        
+        <article class="service-card" data-tilt>
+          <div class="service-card__glow" aria-hidden="true"></div>
+          <span class="service-card__num">01</span>
+          <div class="service-card__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M3 21h18"/><path d="M5 21V10l7-6 7 6v11"/><path d="M9 21v-5a3 3 0 0 1 6 0v5"/><path d="M12 4v-1"/>
+
+</svg>
+</div>
+          <h3>Gartengestaltung</h3>
+          <p>Individuelle Entwürfe, die Ihren Außenbereich zu einem Ort machen, den Sie nicht mehr verlassen möchten.</p>
+          
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Grundstücksaufnahme &amp; 3D-Entwurf</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Pflanzpläne</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Projektleitung</li>
+          </ul>
+          
+        </article>
+        
+        <article class="service-card" data-tilt>
+          <div class="service-card__glow" aria-hidden="true"></div>
+          <span class="service-card__num">02</span>
+          <div class="service-card__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M2 20h20"/><path d="M4 20c0-4 1-7 2-9"/><path d="M8 20c0-5 1.5-9 4-12"/><path d="M12 20c0-4 2-8 5-10"/><path d="M16 20c0-3 1.5-5 4-6"/>
+
+</svg>
+</div>
+          <h3>Rasenpflege</h3>
+          <p>Dichter, gesunder Rasen das ganze Jahr – von der Neuanlage bis zum Vertikutieren, Düngen und Ausbessern.</p>
+          
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Rollrasen &amp; Aussaat</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Vertikutieren &amp; Belüften</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Saisonale Düngung</li>
+          </ul>
+          
+        </article>
+        
+        <article class="service-card" data-tilt>
+          <div class="service-card__glow" aria-hidden="true"></div>
+          <span class="service-card__num">03</span>
+          <div class="service-card__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M12 22v-6"/><path d="M7 16h10a4 4 0 0 0 1-7.9A6 6 0 0 0 6.1 7 4.5 4.5 0 0 0 7 16z"/>
+
+</svg>
+</div>
+          <h3>Hecken &amp; Bäume</h3>
+          <p>Saubere Hecken und schön geformte Bäume – sicher geschnitten und anschließend aufgeräumt.</p>
+          
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Hecken- &amp; Formschnitt</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Kronenrückschnitt</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Abtransport von Grünschnitt</li>
+          </ul>
+          
+        </article>
+        
+        </div>
+        
+        <div class="services__row" data-drag-scroll>
+        
+        <article class="service-card" data-tilt>
+          <div class="service-card__glow" aria-hidden="true"></div>
+          <span class="service-card__num">04</span>
+          <div class="service-card__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M12 22V11"/><path d="M12 11C12 7 9 4 4 4c0 4 3 7 8 7z"/><path d="M12 14c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M7 22h10"/>
+
+</svg>
+</div>
+          <h3>Bepflanzung &amp; Beete</h3>
+          <p>Farbenfrohe, pflegeleichte Beete, passend zu Ihrem Boden, dem Licht und Ihrem Lebensstil.</p>
+          
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Saisonale Bepflanzung</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Staudenbeete</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Gemüsebeete</li>
+          </ul>
+          
+        </article>
+        
+        <article class="service-card" data-tilt>
+          <div class="service-card__glow" aria-hidden="true"></div>
+          <span class="service-card__num">05</span>
+          <div class="service-card__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M2 10l10-6 10 6"/><path d="M2 10h20"/><path d="M5 10v11"/><path d="M19 10v11"/><path d="M3 21h18"/><path d="M8 15h8"/>
+
+</svg>
+</div>
+          <h3>Gartenpavillons</h3>
+          <p>Pavillons nach Maß – ein gemütlicher, schattiger Sitzplatz in Ihrem Garten, gebaut für viele Jahre.</p>
+          
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Individuell geplant</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Holzpavillons &amp; Pergolen</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Komplette Montage</li>
+          </ul>
+          
+        </article>
+        
+        <article class="service-card" data-tilt>
+          <div class="service-card__glow" aria-hidden="true"></div>
+          <span class="service-card__num">06</span>
+          <div class="service-card__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M14 6l4-4 4 4-4 4"/><path d="M18 6L8 16"/><path d="M8 16l-4 4"/><path d="M6 14l4 4"/><path d="M3 9c2-3 5-4 8-3"/>
+
+</svg>
+</div>
+          <h3>Gartenpflege</h3>
+          <p>Regelmäßige Besuche, damit alles zu jeder Jahreszeit bestens aussieht.</p>
+          
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Wöchentliche oder 14-tägige Besuche</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Jäten &amp; Rückschnitt</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+Frühjahrs- &amp; Herbstputz</li>
+          </ul>
+          
+        </article>
+        
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="process" id="process" data-process>
+    <div class="process__sticky">
+      <div class="container process__grid">
+        <div class="process__visual">
+          <canvas class="process__canvas" data-grow-canvas aria-label="Ein 3D-Baum, der beim Scrollen aus einem Topf wächst" role="img"></canvas>
+          <div class="process__progress" aria-hidden="true"><span data-process-bar></span></div>
+        </div>
+        <div class="process__content">
+          <p class="eyebrow">So arbeiten wir</p>
+          <h2 class="section-title">Vom Samen zur <em>Pracht</em>.</h2>
+          <ol class="process__steps">
+            <li class="process__step is-active" data-step>
+              <span class="process__step-num">01</span>
+              <div><h3>Kostenlose Beratung</h3><p>Wir kommen vorbei, hören zu, wie Sie Ihren Garten nutzen möchten, und prüfen Boden, Licht und Entwässerung genau.</p></div>
+            </li>
+            <li class="process__step" data-step>
+              <span class="process__step-num">02</span>
+              <div><h3>Entwurf &amp; Angebot</h3><p>Sie erhalten einen klaren Plan und ein festes, detailliertes Angebot – ohne Überraschungen und ohne Druck.</p></div>
+            </li>
+            <li class="process__step" data-step>
+              <span class="process__step-num">03</span>
+              <div><h3>Bau &amp; Bepflanzung</h3><p>Unser Team setzt alles mit hochwertigen Materialien um und hinterlässt alles blitzsauber.</p></div>
+            </li>
+            <li class="process__step" data-step>
+              <span class="process__step-num">04</span>
+              <div><h3>Pflege</h3><p>Auf Wunsch sorgen regelmäßige Pflegebesuche dafür, dass Ihr Garten das ganze Jahr gedeiht und bestens aussieht.</p></div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="work section" id="work">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">Projekte</p>
+          <h2 class="section-title" data-split>Neueste <em>Verwandlungen</em>.</h2>
+        </div>
+        
+        <div class="filters" role="group" aria-label="Projekte filtern">
+          <button type="button" class="filter is-active" data-filter="all" data-total="11" data-more-href="../de/work/" aria-pressed="true">Alle</button>
+          
+          <button type="button" class="filter" data-filter="design" data-total="2" data-more-href="../de/work/design/" aria-pressed="false">Gestaltung</button>
+          
+          <button type="button" class="filter" data-filter="lawn" data-total="2" data-more-href="../de/work/lawn/" aria-pressed="false">Rasen</button>
+          
+          <button type="button" class="filter" data-filter="planting" data-total="5" data-more-href="../de/work/planting/" aria-pressed="false">Bepflanzung</button>
+          
+          <button type="button" class="filter" data-filter="hardscape" data-total="2" data-more-href="../de/work/hardscape/" aria-pressed="false">Befestigte Flächen</button>
+          
+        </div>
+        
+      </div>
+
+      <div class="gallery" data-gallery>
+        
+        <figure class="gallery__item" data-category="design" style="--area: 1 / 1 / span 5 / span 4; --area-m: 1 / 1 / span 3 / span 4">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Bauerngarten neu belebt ansehen">
+    <img src="https://images.unsplash.com/photo-1557429287-b2e26467fc2b?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Bauerngarten neu belebt" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Gestaltung</span>
+    <strong>Bauerngarten neu belebt</strong>
+    <small>Komplette Neugestaltung</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item" data-category="hardscape" style="--area: 1 / 5 / span 3 / span 5; --area-m: 4 / 1 / span 3 / span 2">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Glyzinien-Laubengang ansehen">
+    <img src="https://images.unsplash.com/photo-1558293842-c0fd3db86157?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Glyzinien-Laubengang" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Befestigte Flächen</span>
+    <strong>Glyzinien-Laubengang</strong>
+    <small>Pergola &amp; Kiesweg</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item" data-category="design" style="--area: 1 / 10 / span 3 / span 3; --area-m: 4 / 3 / span 2 / span 2">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Waldrefugium ansehen">
+    <img src="https://images.unsplash.com/photo-1598902108854-10e335adac99?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Waldrefugium" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Gestaltung</span>
+    <strong>Waldrefugium</strong>
+    <small>Naturnahe Bepflanzung</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item" data-category="lawn" style="--area: 4 / 5 / span 2 / span 4; --area-m: 6 / 3 / span 3 / span 2">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Moderner Rasen &amp; Terrasse ansehen">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Moderner Rasen &amp; Terrasse" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Rasen</span>
+    <strong>Moderner Rasen &amp; Terrasse</strong>
+    <small>Rasen &amp; Terrasse</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item" data-category="planting" style="--area: 4 / 9 / span 2 / span 4; --area-m: 7 / 1 / span 2 / span 2">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Nutzgartenbeete ansehen">
+    <img src="https://images.unsplash.com/photo-1584479898061-15742e14f50d?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Nutzgartenbeete" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Bepflanzung</span>
+    <strong>Nutzgartenbeete</strong>
+    <small>Nutzgarten</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item is-phone-hidden" data-category="lawn" style="--area: 6 / 9 / span 5 / span 4">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Neuer Familienrasen ansehen">
+    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Neuer Familienrasen" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Rasen</span>
+    <strong>Neuer Familienrasen</strong>
+    <small>Neuer Rollrasen</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item is-phone-hidden" data-category="hardscape" style="--area: 6 / 1 / span 3 / span 3">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Rosenweg &amp; Hecke ansehen">
+    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Rosenweg &amp; Hecke" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Befestigte Flächen</span>
+    <strong>Rosenweg &amp; Hecke</strong>
+    <small>Ziegelweg &amp; Buchseinfassung</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item is-phone-hidden" data-category="planting" style="--area: 6 / 4 / span 3 / span 5">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Gemüsehochbeete ansehen">
+    <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Gemüsehochbeete" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Bepflanzung</span>
+    <strong>Gemüsehochbeete</strong>
+    <small>Hochbeete aus Holzbohlen</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item is-phone-hidden" data-category="planting" style="--area: 9 / 1 / span 2 / span 4">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Frühjahrsbepflanzung ansehen">
+    <img src="https://images.unsplash.com/photo-1621460248083-6271cc4437a8?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Frühjahrsbepflanzung" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Bepflanzung</span>
+    <strong>Frühjahrsbepflanzung</strong>
+    <small>Saisonale Beete</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item is-phone-hidden" data-category="planting" style="--area: 9 / 5 / span 2 / span 4">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Anzuchttisch ansehen">
+    <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Anzuchttisch" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Bepflanzung</span>
+    <strong>Anzuchttisch</strong>
+    <small>Selbst gezogene Jungpflanzen</small>
+  </figcaption>
+</figure>
+
+        
+        <figure class="gallery__item is-hidden" data-category="planting">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Bodenverbesserung ansehen">
+    <img src="https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Bodenverbesserung" loading="lazy" decoding="async">
+  </button>
+  <figcaption>
+    <span class="gallery__tag">Bepflanzung</span>
+    <strong>Bodenverbesserung</strong>
+    <small>Beetvorbereitung</small>
+  </figcaption>
+</figure>
+
+        
+      </div>
+
+      <div class="work__more" data-gallery-more>
+        <a href="../de/work/" class="text-link" data-gallery-more-link>Mehr anzeigen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</a>
+      </div>
+    </div>
+    <script id="gallery-layouts" type="application/json">{"desktop": {"1": [[1, 1, 12, 4]], "2": [[1, 1, 7, 5], [8, 1, 5, 5]], "3": [[1, 1, 7, 5], [8, 1, 5, 3], [8, 4, 5, 2]], "4": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2]], "5": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2]], "6": [[1, 1, 7, 5], [8, 1, 5, 3], [8, 4, 5, 2], [1, 6, 4, 3], [5, 6, 4, 3], [9, 6, 4, 3]], "7": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2], [1, 6, 5, 3], [6, 6, 3, 3], [9, 6, 4, 3]], "8": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2], [1, 6, 5, 3], [6, 6, 3, 3], [9, 6, 4, 3]], "9": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2], [9, 6, 4, 5], [1, 6, 3, 3], [4, 6, 5, 3], [1, 9, 4, 2], [5, 9, 4, 2]], "10": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2], [9, 6, 4, 5], [1, 6, 3, 3], [4, 6, 5, 3], [1, 9, 4, 2], [5, 9, 4, 2]]}, "mobile": {"1": [[1, 1, 4, 4]], "2": [[1, 1, 2, 4], [3, 1, 2, 4]], "3": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2]], "4": [[1, 1, 2, 3], [3, 1, 2, 2], [3, 3, 2, 3], [1, 4, 2, 2]], "5": [[1, 1, 4, 3], [1, 4, 2, 3], [3, 4, 2, 2], [3, 6, 2, 3], [1, 7, 2, 2]], "6": [[1, 1, 2, 4], [3, 1, 2, 2], [3, 3, 2, 2], [1, 5, 4, 3], [1, 8, 2, 2], [3, 8, 2, 2]], "7": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2]], "8": [[1, 1, 2, 3], [3, 1, 2, 2], [3, 3, 2, 3], [1, 4, 2, 2], [1, 6, 4, 3], [1, 9, 2, 4], [3, 9, 2, 2], [3, 11, 2, 2]], "9": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2], [1, 11, 2, 4], [3, 11, 2, 4]], "10": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2], [1, 11, 2, 4], [3, 11, 2, 2], [3, 13, 2, 2]]}, "mobilePerView": 5}</script>
+  </section>
+
+  
+  <section class="band" aria-label="Kontakt aufnehmen">
+    <div class="band__bg" data-parallax-bg>
+      <img src="https://images.unsplash.com/photo-1558293842-c0fd3db86157?w=2000&q=80&auto=format&fit=crop" alt="" loading="lazy">
+    </div>
+    <div class="band__content container">
+      <p class="band__quote" data-split>„Die beste Zeit, einen Baum zu pflanzen, war vor zwanzig Jahren. Die zweitbeste Zeit ist <em>jetzt</em>.“</p>
+      <a href="#contact" class="btn btn--sun magnetic">Projekt starten <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</a>
+    </div>
+  </section>
+
+  
+  <section class="reviews section" id="reviews">
+    <div class="container">
+      <div class="section-head section-head--split">
+        <div>
+          <p class="eyebrow">Freundliche Worte</p>
+          <h2 class="section-title" data-split>Von <em>unseren Kunden</em> geschätzt.</h2>
+        </div>
+        
+        <div class="rating-card">
+          
+          <div>
+            <div class="rating-card__score"><strong>5,0</strong><span class="stars" role="img" aria-label="5,0 von 5 Sternen"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+</div>
+            <small>Durchschnittliche Kundenbewertung</small>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+
+    
+    <div class="reviews__rail" data-rail tabindex="0" aria-label="Kundenbewertungen">
+      
+      <article class="review-card">
+        <div class="review-card__top">
+          <span class="stars" role="img" aria-label="5 von 5 Sternen"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+
+          
+        </div>
+        <div class="review-card__body">
+          <blockquote data-review-text>I&#x27;ve had a very positive experience with this gardening company. From the start they came across as professional and reliable, and it was clear they really know their work. I really appreciate their approach: they patiently explained everything, helped me choose the plants and told me what each plant needs, where to plant it and how to look after it. The finished garden looks great and exactly how I imagined it. Whether it&#x27;s garden design or regular maintenance, I definitely recommend R&amp;S Gardening.</blockquote>
+          
+          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Mehr anzeigen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</a>
+          
+        </div>
+        <footer>
+          
+          <span class="review-card__avatar">D</span>
+          
+          <div>
+            <strong>David Bab</strong>
+            <small>Übersetzt</small>
+          </div>
+        </footer>
+      </article>
+      
+      <article class="review-card">
+        <div class="review-card__top">
+          <span class="stars" role="img" aria-label="5 von 5 Sternen"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+
+          
+        </div>
+        <div class="review-card__body">
+          <blockquote data-review-text>A very professional and personal approach. Keep it up! 👍👍</blockquote>
+          
+          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Mehr anzeigen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</a>
+          
+        </div>
+        <footer>
+          
+          <span class="review-card__avatar">V</span>
+          
+          <div>
+            <strong>Viktor Palus</strong>
+            <small>Übersetzt</small>
+          </div>
+        </footer>
+      </article>
+      
+      <article class="review-card">
+        <div class="review-card__top">
+          <span class="stars" role="img" aria-label="5 von 5 Sternen"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+
+          
+        </div>
+        <div class="review-card__body">
+          <blockquote data-review-text>A professional approach and expert work – I recommend them to everyone.</blockquote>
+          
+          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Mehr anzeigen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</a>
+          
+        </div>
+        <footer>
+          
+          <span class="review-card__avatar">S</span>
+          
+          <div>
+            <strong>Sara Pútecová</strong>
+            <small>Übersetzt</small>
+          </div>
+        </footer>
+      </article>
+      
+    </div>
+    <div class="container reviews__controls">
+      
+      <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="reviews__all">Alle Bewertungen auf Google <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</a>
+      
+      <button type="button" class="round-btn" data-rail-prev aria-label="Vorherige Bewertungen"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>
+
+</svg>
+</button>
+      <button type="button" class="round-btn" data-rail-next aria-label="Weitere Bewertungen"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</button>
+    </div>
+    
+  </section>
+
+  
+  <section class="contact section section--dark" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__info">
+        <p class="eyebrow eyebrow--light">Kontakt</p>
+        <h2 class="section-title" data-split>Lassen Sie uns etwas <em>Schönes</em> wachsen lassen.</h2>
+        <p class="contact__lead">Erzählen Sie uns kurz von Ihrem Garten – wir melden uns innerhalb eines Werktages mit Ideen und einem kostenlosen, unverbindlichen Angebot.</p>
+        <ul class="contact__list">
+          <li><span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+
+</svg>
+</span><div><small>Rufen Sie uns an</small><a href="tel:+421918761056">+421 918 761 056</a></div></li>
+          <li><span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 7l-10 6L2 7"/>
+
+</svg>
+</span><div><small>E-Mail</small><a href="mailto:info@rsgardening.com">info@rsgardening.com</a></div></li>
+          
+          <li><span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+
+</svg>
+</span><div><small>Arbeitszeiten</small>Mo – Sa · 7:30 – 18:00</div></li>
+        </ul>
+      </div>
+
+      <div class="contact__card">
+        
+        <form method="post" action="https://formspree.io/f/YOUR_FORM_ID" class="form" data-contact-form novalidate>
+          <div class="form__hp" aria-hidden="true"><label for="id_website">Website:</label><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" id="id_website"></div>
+          <div class="form__row">
+            <div class="field" data-field="name">
+  <input type="text" name="name" placeholder=" " autocomplete="name" maxlength="100" required id="id_name">
+  <label for="id_name">Ihr Name</label>
+  <p class="field__error"></p>
+</div>
+
+            <div class="field" data-field="email">
+  <input type="email" name="email" placeholder=" " autocomplete="email" maxlength="254" required id="id_email">
+  <label for="id_email">E-Mail-Adresse</label>
+  <p class="field__error"></p>
+</div>
+
+          </div>
+          <div class="form__row">
+            <div class="field" data-field="phone">
+  <input type="text" name="phone" placeholder=" " autocomplete="tel" inputmode="tel" maxlength="30" id="id_phone">
+  <label for="id_phone">Telefon (optional)</label>
+  <p class="field__error"></p>
+</div>
+
+            <div class="field field--select" data-field="service">
+              <select name="service" id="id_service">
+  <option value="" selected>Noch unsicher</option>
+
+  <option value="Gartengestaltung">Gartengestaltung</option>
+
+  <option value="Rasenpflege">Rasenpflege</option>
+
+  <option value="Hecken &amp; Bäume">Hecken &amp; Bäume</option>
+
+  <option value="Bepflanzung &amp; Beete">Bepflanzung &amp; Beete</option>
+
+  <option value="Gartenpavillons">Gartenpavillons</option>
+
+  <option value="Gartenpflege">Gartenpflege</option>
+
+</select>
+              <label for="id_service">Wobei können wir helfen?</label>
+              <p class="field__error"></p>
+            </div>
+          </div>
+          <div class="field" data-field="message">
+  <textarea name="message" cols="40" rows="5" placeholder=" " maxlength="3000" required id="id_message">
+</textarea>
+  <label for="id_message">Erzählen Sie uns von Ihrem Garten</label>
+  <p class="field__error"></p>
+</div>
+
+          <button type="submit" class="btn btn--sun btn--block magnetic" data-submit>
+            <span>Nachricht senden</span> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+
+          </button>
+          <p class="form__note">Wir verwenden Ihre Daten nur, um Ihre Anfrage zu beantworten.</p>
+        </form>
+        <div class="form-success" role="status" data-form-success data-default-message="Vielen Dank! Ihre Nachricht ist unterwegs – wir melden uns innerhalb eines Werktages.">
+          <div class="form-success__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M20 6L9 17l-5-5"/>
+
+</svg>
+</div>
+          <h3>Nachricht gesendet!</h3>
+          <p data-success-text></p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#top" class="nav__logo" aria-label="R&amp;S Gardening – Startseite">
+          <span class="nav__logo-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50c0-20 14-32 36-34-1 20-13 34-35 34" fill="currentColor"/><path d="M14 50c7-12 16-19 26-25" stroke="var(--forest-900)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+          </span>
+          <span class="nav__logo-text">RSGardening</span>
+        </a>
+        <p>Gartengestaltung, Garten- und Landschaftsbau und ganzjährige Pflege von einem kleinen, regionalen Team, das jeden Garten wie seinen eigenen behandelt.</p>
+        
+        <div class="footer__social">
+          <a href="https://www.instagram.com/rsgardening_?utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/>
+
+</svg>
+</a>
+          <a href="https://www.facebook.com/people/RS-gardening/100066696214556/?mibextid=wwXIfr&amp;rdid=6PdjOyAXdhFDMxRD&amp;share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17nPSTtLZQ%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v4H8v7h4v-7h3l.5-4H12V7.5c0-.6.4-1 1-1h2z"/>
+
+</svg>
+</a>
+        </div>
+        
+      </div>
+
+      <nav class="footer__col" aria-label="Fußzeile">
+        <h3>Entdecken</h3>
+        <a href="#about">Über uns</a>
+        <a href="#services">Leistungen</a>
+        <a href="#process">So arbeiten wir</a>
+        <a href="../de/work/">Unsere Projekte</a>
+        <a href="#reviews">Bewertungen</a>
+      </nav>
+
+      <div class="footer__col">
+        <h3>Kontakt</h3>
+        <a href="tel:+421918761056">+421 918 761 056</a>
+        <a href="mailto:info@rsgardening.com">info@rsgardening.com</a>
+        
+        <span>Mo – Sa · 7:30 – 18:00</span>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 R&amp;S Gardening. Alle Rechte vorbehalten.</p>
+      <a href="#top" class="footer__top-link">Nach oben ↑</a>
+    </div>
+  </div>
+
+  
+  <div class="footer__wordmark" aria-hidden="true" data-wordmark>
+    <div class="footer__wordmark-text" data-wordmark-text><span>R</span><span>S</span><span>G</span><span>A</span><span>R</span><span>D</span><span>E</span><span>N</span><span>I</span><span>N</span><span>G</span></div>
+  </div>
+</footer>
+
+<div class="lightbox" data-lightbox-root aria-hidden="true" role="dialog" aria-modal="true" aria-label="Projektgalerie">
+  <button type="button" class="lightbox__close round-btn" data-lightbox-close aria-label="Schließen"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M18 6L6 18"/><path d="M6 6l12 12"/>
+
+</svg>
+</button>
+  <button type="button" class="lightbox__nav lightbox__nav--prev round-btn" data-lightbox-prev aria-label="Vorheriges Bild"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>
+
+</svg>
+</button>
+  <figure>
+    <img src="" alt="" data-lightbox-img>
+    <figcaption data-lightbox-caption></figcaption>
+  </figure>
+  <button type="button" class="lightbox__nav lightbox__nav--next round-btn" data-lightbox-next aria-label="Nächstes Bild"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+
+</svg>
+</button>
+</div>
+
+
+  
+<div class="lang-fab" data-lang-fab>
+  <button type="button" class="lang-fab__toggle" aria-expanded="false" aria-controls="lang-fab-options" aria-label="Sprache ändern" title="Sprache ändern">DE</button>
+  <div class="lang-fab__options" id="lang-fab-options">
+    
+    <a href="../" hreflang="sk" lang="sk">SK <span>Slovenčina</span></a>
+    
+    <a href="../en/" hreflang="en" lang="en">EN <span>English</span></a>
+    
+  </div>
+</div>
+
+  <a href="#top" class="to-top" aria-label="Nach oben" title="Nach oben">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </a>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+  <script defer src="../static/core/js/main.js"></script>
+  
+<script type="module" src="../static/core/js/grow-scene.js"></script>
+
+</body>
+</html>
