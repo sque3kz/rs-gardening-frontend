@@ -41,7 +41,7 @@ export function jitter(geometry, amount, rand, keep = () => false) {
   return geometry;
 }
 
-export function mesh(geometry, material, { shadows = true } = {}) {
+export function mesh(geometry, material, { shadows = !lowPower } = {}) {
   const m = new THREE.Mesh(geometry, material);
   m.castShadow = shadows;
   m.receiveShadow = shadows;
@@ -59,12 +59,16 @@ export function easeOutBack(t) {
   return t <= 0 ? 0 : t >= 1 ? 1 : 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
 }
 
+/** Phones and tablets: skip real-time shadows and other GPU-heavy extras. */
+export const lowPower = window.matchMedia('(max-width: 900px), (pointer: coarse)').matches;
+
 export function createRenderer(canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   // Phones have very dense screens; 1.5x still looks sharp and keeps scrolling smooth.
-  const maxRatio = window.matchMedia('(max-width: 900px)').matches ? 1.5 : 2;
+  const maxRatio = lowPower ? 1.5 : 2;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
-  renderer.shadowMap.enabled = true;
+  // The shadow pass draws the whole scene a second time every frame – too much for phones.
+  renderer.shadowMap.enabled = !lowPower;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;

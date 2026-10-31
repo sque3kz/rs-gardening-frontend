@@ -1,6 +1,7 @@
 /* Process section: a tree grows out of a terracotta pot as you scroll. */
 import * as THREE from 'three';
-import { createRenderer, easeOutBack, jitter, mat, mesh, reducedMotion, runWhenVisible, seededRandom, smoothstep, webglAvailable } from './three-utils.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { createRenderer, easeOutBack, jitter, lowPower, mat, mesh, reducedMotion, runWhenVisible, seededRandom, smoothstep, webglAvailable } from './three-utils.js';
 
 const canvas = document.querySelector('[data-grow-canvas]');
 
@@ -31,10 +32,26 @@ function init() {
   sun.shadow.bias = -0.0005;
   scene.add(sun);
 
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.18 }));
-  floor.rotation.x = -Math.PI / 2;
-  floor.receiveShadow = true;
-  scene.add(floor);
+  if (lowPower) {
+    // Phones: a soft painted blob under the pot instead of real-time shadows.
+    const blob = document.createElement('canvas');
+    blob.width = blob.height = 64;
+    const ctx = blob.getContext('2d');
+    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, 'rgba(40, 30, 20, 0.32)');
+    gradient.addColorStop(1, 'rgba(40, 30, 20, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 64, 64);
+    const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.6), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(blob), transparent: true, depthWrite: false }));
+    shadow.rotation.x = -Math.PI / 2;
+    shadow.position.set(0.25, 0.005, -0.2);
+    scene.add(shadow);
+  } else {
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.18 }));
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
+  }
 
   const plant = new THREE.Group();
   scene.add(plant);
@@ -62,19 +79,26 @@ function init() {
   /* ---------- Procedural tree ---------- */
   const growables = []; // { object, start, duration, kind }
   const leafGeo = new THREE.IcosahedronGeometry(1, 0);
+  const leafMat = mat(0xffffff, { vertexColors: true });
+  const placer = new THREE.Object3D();
 
   const addLeafCluster = (parent, y, start, size) => {
     const cluster = new THREE.Group();
     cluster.position.y = y;
+    // All leaves of a cluster are baked into one mesh (coloured per vertex) – one draw call instead of 3–4.
     const count = 3 + Math.floor(rand() * 2);
-    for (let i = 0; i < count; i++) {
-      const leaf = mesh(leafGeo, mat(rand.pick(C.leaves)));
-      const r = size * rand.range(0.55, 1);
-      leaf.scale.setScalar(r);
-      leaf.position.set(rand.range(-0.3, 0.3) * size * 2, rand.range(-0.1, 0.35) * size * 2, rand.range(-0.3, 0.3) * size * 2);
-      leaf.rotation.set(rand() * 3, rand() * 3, rand() * 3);
-      cluster.add(leaf);
-    }
+    const leaves = Array.from({ length: count }, () => {
+      const color = new THREE.Color(rand.pick(C.leaves));
+      placer.scale.setScalar(size * rand.range(0.55, 1));
+      placer.position.set(rand.range(-0.3, 0.3) * size * 2, rand.range(-0.1, 0.35) * size * 2, rand.range(-0.3, 0.3) * size * 2);
+      placer.rotation.set(rand() * 3, rand() * 3, rand() * 3);
+      placer.updateMatrix();
+      const leaf = leafGeo.clone().applyMatrix4(placer.matrix);
+      const n = leaf.attributes.position.count;
+      leaf.setAttribute('color', new THREE.Float32BufferAttribute(Array.from({ length: n }, () => [color.r, color.g, color.b]).flat(), 3));
+      return leaf;
+    });
+    cluster.add(mesh(mergeGeometries(leaves), leafMat));
     parent.add(cluster);
     growables.push({ object: cluster, start, duration: 0.14, kind: 'pop' });
 
@@ -186,4 +210,12 @@ function init() {
   });
 }
 
-if (canvas && webglAvailable()) init();
+// Build the scene shortly before it scrolls into view rather than while the page is loading.
+if (canvas && webglAvailable()) {
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    observer.disconnect();
+    init();
+  }, { rootMargin: '150% 0px' });
+  observer.observe(canvas);
+}

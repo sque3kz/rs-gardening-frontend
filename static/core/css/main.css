@@ -109,7 +109,8 @@ em { font-style: italic; }
 /* split-text reveal */
 /* Extra room (cancelled out by negative margins) so italic overhangs and descenders aren't clipped */
 .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.04em 0.16em 0.2em; margin: -0.04em -0.16em -0.2em; }
-.wi { display: inline-block; will-change: transform; }
+/* No permanent will-change: one GPU layer per word adds up to hundreds on a phone. GSAP promotes them only while animating. */
+.wi { display: inline-block; }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -921,6 +922,31 @@ html.js:not(.reduced-motion) [data-reveal] { opacity: 0; transform: translateY(4
   .lightbox { grid-template-columns: 1fr; padding-inline: 16px; }
   .lightbox__nav { display: none; }
 }
+
+/* Touch screens: lighter effects so scrolling stays smooth.
+   Live blurs and blend modes are repainted on every scrolled frame, which phones can't keep up with. */
+@media (max-width: 900px), (pointer: coarse) {
+  .nav__inner { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(11, 31, 21, 0.72); }
+  /* Soft glows painted as gradients instead of a huge, constantly animated blur */
+  .hero__glow { filter: none; animation: none; }
+  .hero__glow--a { background: radial-gradient(closest-side, #3f8f57, rgba(63, 143, 87, 0)); transform: scale(1.4); }
+  .hero__glow--b { background: radial-gradient(closest-side, #b98f2a, rgba(185, 143, 42, 0)); transform: scale(1.4); }
+  .hero__grain { display: none; }
+  .leaf--7, .leaf--8 { filter: none; }
+  .gallery__tag { backdrop-filter: none; }
+}
+
+/* Scroll parallax on touch screens, run by the browser alongside the scroll (enabled in main.js) */
+@supports (animation-timeline: view()) {
+  html.css-parallax:not(.reduced-motion) section { view-timeline: --section block; }
+  html.css-parallax:not(.reduced-motion) [data-parallax] { animation: parallax-y linear both; animation-timeline: --section; }
+  html.css-parallax:not(.reduced-motion) .about__img img { animation: parallax-img linear both; animation-timeline: view(); }
+  html.css-parallax:not(.reduced-motion) [data-parallax-bg] { animation: parallax-bg linear both; animation-timeline: --section; }
+}
+/* `translate` rather than `transform`, so GSAP's intro tweens on the same elements still apply */
+@keyframes parallax-y { from { translate: 0 0; } to { translate: 0 var(--parallax, 0px); } }
+@keyframes parallax-img { from { translate: 0 -12%; } to { translate: 0 0; } }
+@keyframes parallax-bg { from { translate: 0 -14%; } to { translate: 0 14%; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }

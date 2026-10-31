@@ -7,7 +7,12 @@
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const hasGsap = Boolean(window.gsap && window.ScrollTrigger);
 
-  if (hasGsap) gsap.registerPlugin(ScrollTrigger, ...(window.Flip ? [Flip] : []));
+  if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger, ...(window.Flip ? [Flip] : []));
+    // The phone address bar showing/hiding resizes the window mid-scroll; re-measuring
+    // every pin and trigger then causes a visible hitch.
+    ScrollTrigger.config({ ignoreMobileResize: true });
+  }
 
   /* ------------------------------------------------------------------
      Anchor links (native scrolling – smooth glide via CSS scroll-behavior)
@@ -641,25 +646,33 @@
   });
 
   /* ---------- Parallax ---------- */
-  $$('[data-parallax]').forEach((el) => {
-    const speed = Number(el.dataset.parallax);
-    gsap.to(el, {
-      y: speed * 4, ease: 'none',
-      scrollTrigger: { trigger: el.closest('section') || el, start: 'top bottom', end: 'bottom top', scrub: true },
+  // Touch screens scroll off the main thread, so JS-driven parallax trails a frame
+  // behind and judders. There the browser runs it instead (CSS scroll-driven
+  // animations in main.css); without that support the layers simply stay put.
+  if (!canHover) {
+    $$('[data-parallax]').forEach((el) => el.style.setProperty('--parallax', `${Number(el.dataset.parallax) * 4}px`));
+    if (CSS.supports('animation-timeline: view()')) root.classList.add('css-parallax');
+  } else {
+    $$('[data-parallax]').forEach((el) => {
+      const speed = Number(el.dataset.parallax);
+      gsap.to(el, {
+        y: speed * 4, ease: 'none',
+        scrollTrigger: { trigger: el.closest('section') || el, start: 'top bottom', end: 'bottom top', scrub: true },
+      });
     });
-  });
-  $$('.about__img img').forEach((img) => {
-    gsap.fromTo(img, { yPercent: -12 }, {
-      yPercent: 0, ease: 'none',
-      scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: true },
+    $$('.about__img img').forEach((img) => {
+      gsap.fromTo(img, { yPercent: -12 }, {
+        yPercent: 0, ease: 'none',
+        scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: true },
+      });
     });
-  });
-  $$('[data-parallax-bg]').forEach((el) => {
-    gsap.fromTo(el, { yPercent: -14 }, {
-      yPercent: 14, ease: 'none',
-      scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
+    $$('[data-parallax-bg]').forEach((el) => {
+      gsap.fromTo(el, { yPercent: -14 }, {
+        yPercent: 14, ease: 'none',
+        scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
+      });
     });
-  });
+  }
   // Only when text and photos sit side by side – when stacked, it would slide over the photos.
   gsap.matchMedia().add('(min-width: 901px)', () => {
     gsap.to('.hero__content', {
