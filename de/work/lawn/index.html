@@ -14,6 +14,24 @@
   <link rel="alternate" hreflang="en" href="../../../en/work/lawn/">
   <link rel="alternate" hreflang="de" href="../../../de/work/lawn/">
   
+  <script>
+    // Language choice. First visit: show the language window (html.needs-language, see
+    // language_picker.html). After that the choice is remembered, and arriving from outside
+    // the site (typed address, search result, bookmark) opens the page in that language.
+    // Moving around within the site never redirects. Search engine bots are left alone.
+    (function () {
+      var KEY = 'rs-language';
+      try {
+        if (/bot|crawl|spider|slurp|preview|lighthouse/i.test(navigator.userAgent)) return;
+        var root = document.documentElement, saved = localStorage.getItem(KEY);
+        if (!saved) { root.classList.add('needs-language'); return; }
+        var fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
+        if (saved === root.lang || fromSite) return;
+        var link = document.querySelector('link[rel="alternate"][hreflang="' + saved + '"]');
+        if (link) location.replace(link.href + location.hash);
+      } catch (e) { /* storage blocked (e.g. private mode): just show the page as it is */ }
+    })();
+  </script>
   <link rel="icon" href="../../../static/core/img/favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -260,6 +278,51 @@
     
     <a href="../../../en/work/lawn/" hreflang="en" lang="en">EN <span>English</span></a>
     
+  </div>
+</div>
+
+  
+
+<div class="lang-picker" data-lang-picker role="dialog" aria-modal="true" aria-labelledby="lang-picker-title">
+  <svg width="0" height="0" class="sr-only" aria-hidden="true">
+    <symbol id="lp-leaf-round" viewBox="0 0 100 100"><path d="M10 90C10 40 40 10 90 10 90 60 60 90 10 90z"/><path d="M10 90L70 30" class="lang-picker__vein"/></symbol>
+    <symbol id="lp-leaf-long" viewBox="0 0 100 100"><path d="M50 4C70 26 74 62 50 96 26 62 30 26 50 4z"/><path d="M50 96V18" class="lang-picker__vein"/></symbol>
+  </svg>
+
+  <div class="lang-picker__frame">
+    
+    <div class="lang-picker__leaves" aria-hidden="true">
+      <svg class="lang-picker__leaf lang-picker__leaf--1"><use href="#lp-leaf-long"/></svg>
+      <svg class="lang-picker__leaf lang-picker__leaf--2"><use href="#lp-leaf-round"/></svg>
+      <svg class="lang-picker__leaf lang-picker__leaf--3"><use href="#lp-leaf-round"/></svg>
+      <svg class="lang-picker__leaf lang-picker__leaf--4"><use href="#lp-leaf-long"/></svg>
+    </div>
+
+    <div class="lang-picker__card">
+      <span class="nav__logo-mark lang-picker__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><path d="M14 50c0-20 14-32 36-34-1 20-13 34-35 34" fill="currentColor"/><path d="M14 50c7-12 16-19 26-25" stroke="var(--forest-900)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      <h2 class="lang-picker__title" id="lang-picker-title">
+        <span lang="sk">Vyberte si jazyk</span>
+        <span lang="en">Choose your language</span>
+        <span lang="de">Sprache wählen</span>
+      </h2>
+      <div class="lang-picker__options">
+        
+        <a class="lang-picker__option" href="../../../work/lawn/" hreflang="sk" lang="sk">
+          <span class="lang-picker__code">SK</span>Slovenčina
+        </a>
+        
+        <a class="lang-picker__option" href="../../../en/work/lawn/" hreflang="en" lang="en">
+          <span class="lang-picker__code">EN</span>English
+        </a>
+        
+        <a class="lang-picker__option" href="../../../de/work/lawn/" hreflang="de" lang="de">
+          <span class="lang-picker__code">DE</span>Deutsch
+        </a>
+        
+      </div>
+    </div>
   </div>
 </div>
 

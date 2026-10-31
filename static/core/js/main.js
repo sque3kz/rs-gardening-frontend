@@ -117,12 +117,43 @@
       toggle.setAttribute('aria-expanded', String(open));
     };
     toggle.addEventListener('click', () => setOpen(!langFab.classList.contains('is-open')));
+    // Remember a language picked here (see the language script in base.html)
+    $$('a[hreflang]', langFab).forEach((link) => link.addEventListener('click', () => {
+      try { localStorage.setItem('rs-language', link.hreflang); } catch (e) { /* storage blocked */ }
+    }));
     // Fold it back up when it slides away
     window.addEventListener('scroll', () => {
       if (!root.classList.contains('show-corner-buttons')) setOpen(false);
     }, { passive: true });
     document.addEventListener('click', (e) => { if (!langFab.contains(e.target)) setOpen(false); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  /* ------------------------------------------------------------------
+     First-visit language window (shown by the script in base.html). The
+     browser's own language is highlighted as a suggestion; picking one is
+     remembered and opens this page in it. Escape keeps the current language.
+  ------------------------------------------------------------------ */
+  const picker = $('[data-lang-picker]');
+  if (picker && root.classList.contains('needs-language')) {
+    const choices = $$('a[hreflang]', picker);
+    const browser = (navigator.languages?.[0] || navigator.language || '').toLowerCase().slice(0, 2);
+    const suggested = choices.find((c) => c.hreflang === browser) || choices.find((c) => c.hreflang === 'en');
+    suggested?.classList.add('is-suggested');
+    const remember = (code) => { try { localStorage.setItem('rs-language', code); } catch (e) { /* storage blocked */ } };
+    const close = () => { root.classList.remove('needs-language'); };
+    choices.forEach((choice) => choice.addEventListener('click', (e) => {
+      remember(choice.hreflang);
+      if (choice.hreflang === root.lang) { e.preventDefault(); close(); }
+    }));
+    picker.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { remember(root.lang); close(); return; }
+      if (e.key !== 'Tab') return; // keep keyboard focus inside the window
+      const first = choices[0], last = choices[choices.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    (suggested || choices[0])?.focus({ preventScroll: true });
   }
 
   /* ------------------------------------------------------------------
