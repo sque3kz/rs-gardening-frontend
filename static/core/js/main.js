@@ -42,19 +42,23 @@
   const nav = $('[data-nav]');
   // Visible at the very top; after that it hides when scrolling down and only
   // comes back when scrolling up. Direction is judged over a few pixels so the
-  // tiny steps of smooth scrolling don't make it flicker.
+  // tiny steps of smooth scrolling don't make it flicker. The corner buttons
+  // (language, back to top) only show while scrolling up, never at the top.
   let lastY = window.scrollY;
   const onScroll = () => {
     const y = window.scrollY;
     nav.classList.toggle('is-scrolled', y > 30);
+    root.classList.toggle('near-bottom', y > (root.scrollHeight - window.innerHeight) / 2);
     if (root.classList.contains('menu-open')) return;
     if (y < 60) {
       nav.classList.remove('is-hidden');
+      root.classList.remove('show-corner-buttons');
       lastY = y;
       return;
     }
     if (Math.abs(y - lastY) < 8) return;
     nav.classList.toggle('is-hidden', y > lastY);
+    root.classList.toggle('show-corner-buttons', y < lastY);
     lastY = y;
   };
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -103,6 +107,122 @@
   });
 
   /* ------------------------------------------------------------------
+     Language picker: the bottom-left circle rolls out to show the other language
+  ------------------------------------------------------------------ */
+  const langFab = $('[data-lang-fab]');
+  if (langFab) {
+    const toggle = $('button', langFab);
+    const setOpen = (open) => {
+      langFab.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setOpen(!langFab.classList.contains('is-open')));
+    // Fold it back up when it slides away
+    window.addEventListener('scroll', () => {
+      if (!root.classList.contains('show-corner-buttons')) setOpen(false);
+    }, { passive: true });
+    document.addEventListener('click', (e) => { if (!langFab.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  /* ------------------------------------------------------------------
+     Service dropdown: phones open the native <select> list wherever they
+     like (iPhones often show it off to the side), so it's replaced by a
+     button + list that opens right under the field. The real <select> stays
+     in the form, hidden, and is what gets submitted.
+  ------------------------------------------------------------------ */
+  $$('.field--select select').forEach((select) => {
+    const field = select.closest('.field');
+    const label = $('label', field);
+    const button = document.createElement('button');
+    const list = document.createElement('ul');
+    button.type = 'button';
+    button.className = 'select__button';
+    button.id = `${select.id}-button`;
+    button.setAttribute('aria-haspopup', 'listbox');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', `${select.id}-list`);
+    list.className = 'select__list';
+    list.id = `${select.id}-list`;
+    list.setAttribute('role', 'listbox');
+    list.tabIndex = -1;
+    list.hidden = true;
+    if (label) {
+      label.id = label.id || `${select.id}-label`;
+      label.htmlFor = button.id;
+      list.setAttribute('aria-labelledby', label.id);
+    }
+    const options = [...select.options].map((option, index) => {
+      const item = document.createElement('li');
+      item.id = `${select.id}-option-${index}`;
+      item.className = 'select__option';
+      item.setAttribute('role', 'option');
+      item.textContent = option.textContent;
+      list.append(item);
+      return item;
+    });
+    select.tabIndex = -1;
+    select.setAttribute('aria-hidden', 'true');
+    field.classList.add('is-enhanced');
+    select.after(button, list);
+
+    let active = select.selectedIndex;
+    const highlight = (index) => {
+      active = Math.max(0, Math.min(options.length - 1, index));
+      options.forEach((item, i) => item.classList.toggle('is-active', i === active));
+      list.setAttribute('aria-activedescendant', options[active].id);
+      options[active].scrollIntoView({ block: 'nearest' });
+    };
+    const sync = () => {
+      button.textContent = select.options[select.selectedIndex]?.textContent || '';
+      options.forEach((item, i) => item.setAttribute('aria-selected', String(i === select.selectedIndex)));
+    };
+    const open = () => {
+      list.hidden = false;
+      field.classList.add('is-open');
+      button.setAttribute('aria-expanded', 'true');
+      highlight(select.selectedIndex);
+      list.focus({ preventScroll: true });
+    };
+    const close = (refocus = true) => {
+      if (list.hidden) return;
+      list.hidden = true;
+      field.classList.remove('is-open');
+      button.setAttribute('aria-expanded', 'false');
+      if (refocus) button.focus({ preventScroll: true });
+    };
+    const choose = (index) => {
+      select.selectedIndex = index;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      sync();
+      close();
+    };
+
+    button.addEventListener('click', () => (list.hidden ? open() : close()));
+    button.addEventListener('keydown', (e) => {
+      if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) { e.preventDefault(); open(); }
+    });
+    list.addEventListener('click', (e) => {
+      const item = e.target.closest('.select__option');
+      if (item) choose(options.indexOf(item));
+    });
+    list.addEventListener('pointermove', (e) => {
+      const item = e.target.closest('.select__option');
+      if (item && e.pointerType === 'mouse') highlight(options.indexOf(item));
+    });
+    list.addEventListener('keydown', (e) => {
+      const keys = { ArrowDown: active + 1, ArrowUp: active - 1, Home: 0, End: options.length - 1 };
+      if (e.key in keys) { e.preventDefault(); highlight(keys[e.key]); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active); }
+      else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); }
+      else if (e.key === 'Tab') close(false);
+    });
+    document.addEventListener('pointerdown', (e) => { if (!field.contains(e.target)) close(false); });
+    select.addEventListener('change', sync);
+    sync();
+  });
+
+  /* ------------------------------------------------------------------
      Contact form (works without JS too – this just upgrades it)
   ------------------------------------------------------------------ */
   const form = $('[data-contact-form]');
@@ -140,7 +260,7 @@
             $('.form__note', form).textContent = list[0].message;
           }
         });
-        $('.has-error input, .has-error textarea, .has-error select', form)?.focus();
+        $('.has-error input, .has-error textarea, .has-error .select__button', form)?.focus();
       } catch (error) {
         form.submit(); // fall back to a normal POST
       } finally {
@@ -193,11 +313,13 @@
   /* ------------------------------------------------------------------
      Services on phones: two endless rows drifting in opposite directions.
      Each row's cards are repeated so the loop is seamless; the rows can
-     still be dragged (finger or mouse) and pause while held or hovered.
+     still be dragged (finger or mouse), keep gliding after a flick and then
+     ease back into the drift. They pause while held or hovered.
   ------------------------------------------------------------------ */
   const phone = window.matchMedia('(max-width: 640px)');
   const serviceRows = $$('.services__row');
   const SPEED = 26; // px per second
+  const FRICTION = 4; // how quickly a flick slows down (per second)
   let marquees = [];
   let marqueeFrame = null;
   let marqueesOnScreen = false;
@@ -241,7 +363,8 @@
       row.append(track);
       row.classList.add('is-marquee');
 
-      const m = { row, track, originals, x: 0, set: 0, dir: index % 2 === 0 ? -1 : 1, holdUntil: 0, hovering: false, drag: null };
+      // velocity: px/s left over from a flick; speed: 0–1 share of the drift, eased back in after a drag
+      const m = { row, track, originals, x: 0, set: 0, dir: index % 2 === 0 ? -1 : 1, velocity: 0, speed: 1, hovering: false, drag: null, dirty: false };
       m.measure = () => { m.set = track.children[originals.length].offsetLeft - track.children[0].offsetLeft; };
       m.measure();
       // Start the rows at different points so they never line up
@@ -249,7 +372,10 @@
       wrap(m);
       render(m);
 
-      const down = (e) => { m.drag = { startX: e.clientX, startY: e.clientY, startPos: m.x, active: false }; };
+      const down = (e) => {
+        m.drag = { startX: e.clientX, startY: e.clientY, startPos: m.x, active: false, lastX: e.clientX, lastT: e.timeStamp };
+        m.velocity = 0;
+      };
       const move = (e) => {
         if (!m.drag) return;
         const dx = e.clientX - m.drag.startX;
@@ -257,13 +383,23 @@
           m.drag.active = true;
           row.classList.add('is-dragging');
         }
-        if (m.drag.active) { m.x = m.drag.startPos + dx; wrap(m); render(m); }
+        if (!m.drag.active) return;
+        // Smoothed finger speed, used for the glide after letting go
+        const dt = e.timeStamp - m.drag.lastT;
+        if (dt > 0) m.velocity = 0.8 * ((e.clientX - m.drag.lastX) / dt) * 1000 + 0.2 * m.velocity;
+        m.drag.lastX = e.clientX;
+        m.drag.lastT = e.timeStamp;
+        m.x = m.drag.startPos + dx;
+        wrap(m);
+        m.dirty = true; // drawn on the next frame, so fast pointer events don't each restyle the track
       };
-      const up = () => {
+      const up = (e) => {
         if (!m.drag) return;
+        // A drag that stopped before release (or never started) shouldn't glide
+        if (!m.drag.active || e.timeStamp - m.drag.lastT > 80) m.velocity = 0;
         m.drag = null;
+        m.speed = 0; // the drift eases back in once the glide has slowed down
         row.classList.remove('is-dragging');
-        m.holdUntil = performance.now() + 1500; // resume shortly after letting go
       };
       const enter = (e) => { if (e.pointerType === 'mouse') m.hovering = true; };
       const leave = () => { m.hovering = false; };
@@ -290,8 +426,18 @@
       last = now;
       if (marqueesOnScreen) {
         marquees.forEach((m) => {
-          if (m.drag || m.hovering || now < m.holdUntil) return;
-          m.x += m.dir * SPEED * dt;
+          if (m.drag || m.hovering) {
+            if (m.dirty) { m.dirty = false; render(m); }
+            return;
+          }
+          if (Math.abs(m.velocity) > 8) {
+            m.x += m.velocity * dt;
+            m.velocity *= Math.exp(-FRICTION * dt);
+          } else {
+            m.velocity = 0;
+            m.speed = Math.min(1, m.speed + dt / 0.8);
+            m.x += m.dir * SPEED * m.speed * dt;
+          }
           wrap(m);
           render(m);
         });
@@ -317,32 +463,37 @@
   ------------------------------------------------------------------ */
   const gallery = $('[data-gallery]');
   const items = gallery ? $$('.gallery__item', gallery) : [];
-  // Up to ten photos per view, placed using the layout table from core/gallery.py
-  // so the grid always forms a clean rectangle.
+  // Up to ten photos per view (five on phones), placed using the layout table
+  // from core/gallery.py so the grid always forms a clean rectangle.
   const layoutData = $('#gallery-layouts');
   const layouts = layoutData ? JSON.parse(layoutData.textContent) : null;
   const perView = layouts ? Object.keys(layouts.desktop).length : 0;
+  const mobilePerView = layouts?.mobilePerView || perView;
   const area = ([col, row, colSpan, rowSpan]) => `${row} / ${col} / span ${rowSpan} / span ${colSpan}`;
   const more = $('[data-gallery-more]');
   const moreLink = $('[data-gallery-more-link]');
 
   const showCategory = (filter, total, moreHref) => {
     const visible = items.filter((i) => filter === 'all' || i.dataset.category === filter).slice(0, perView);
+    const mobileCount = Math.min(visible.length, mobilePerView);
     const slots = layouts.desktop[visible.length] || [];
-    const mobileSlots = layouts.mobile[visible.length] || [];
+    const mobileSlots = layouts.mobile[mobileCount] || [];
     items.forEach((item) => {
       item.classList.add('is-hidden');
+      item.classList.remove('is-phone-hidden');
       item.style.removeProperty('--area');
       item.style.removeProperty('--area-m');
     });
     visible.forEach((item, index) => {
       item.style.setProperty('--area', area(slots[index]));
-      item.style.setProperty('--area-m', area(mobileSlots[index]));
+      if (index < mobileCount) item.style.setProperty('--area-m', area(mobileSlots[index]));
+      else item.classList.add('is-phone-hidden');
       item.classList.remove('is-hidden');
     });
 
     if (more) {
-      more.hidden = total <= perView;
+      more.hidden = total <= mobilePerView;
+      more.classList.toggle('is-phone-only', total <= perView);
       if (moreHref) moreLink.href = moreHref; // each filter button carries its "Show more" link
     }
   };
@@ -391,7 +542,7 @@
     const img = $('[data-lightbox-img]', lightbox);
     const caption = $('[data-lightbox-caption]', lightbox);
     let current = 0;
-    const visible = () => items.filter((i) => !i.classList.contains('is-hidden'));
+    const visible = () => items.filter((i) => !i.classList.contains('is-hidden') && !(phone.matches && i.classList.contains('is-phone-hidden')));
     const show = (item) => {
       const source = $('img', item);
       img.src = source.currentSrc || source.src;
@@ -507,15 +658,22 @@
 
   gsap.config({ nullTargetWarn: false }); // not every page has every section
 
+  // Phones and tablets get lighter versions of the heavier effects: whole headings fade and rise
+  // instead of every word moving in its own clipped box, and the hero photo fades in instead of a
+  // clip-path wipe (which is repainted on every frame).
+  const lightMotion = !canHover || window.matchMedia('(max-width: 900px)').matches;
+
   /* ---------- Hero intro (runs after the preloader) ---------- */
   const hero = $('.hero');
-  const heroWords = hero ? splitWords($('.hero__title')) : [];
+  const heroWords = hero && !lightMotion ? splitWords($('.hero__title')) : [];
   const heroBits = $$('.hero__eyebrow, .hero__lead, .hero__cta, .hero__trust, .hero__badge');
   const heroLeaves = $$('.hero .leaf');
   if (hero && !reducedMotion) {
-    gsap.set(heroWords, { yPercent: 115 });
+    if (lightMotion) gsap.set('.hero__title', { opacity: 0, y: 40 });
+    else gsap.set(heroWords, { yPercent: 115 });
     gsap.set(heroBits, { opacity: 0, y: 30 });
-    gsap.set('.hero__arch', { clipPath: 'inset(100% 0% 0% 0%)' });
+    if (lightMotion) gsap.set('.hero__arch', { opacity: 0, y: 70 });
+    else gsap.set('.hero__arch', { clipPath: 'inset(100% 0% 0% 0%)' });
     gsap.set('.hero__arch img', { scale: 1.35 });
     gsap.set('.hero__arch-line', { opacity: 0 });
     gsap.set('.hero__inset', { opacity: 0, y: 60 });
@@ -528,8 +686,12 @@
     if (!hero || reducedMotion) return;
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
     tl.to('.nav__inner', { opacity: 1, y: 0, duration: 1.2 }, 0.1)
-      .to(heroWords, { yPercent: 0, duration: 1.4, stagger: 0.07 }, 0.15)
-      .to('.hero__arch', { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut', clearProps: 'clipPath' }, 0.1)
+      .to(lightMotion ? '.hero__title' : heroWords, lightMotion
+        ? { opacity: 1, y: 0, duration: 1.3, clearProps: 'opacity,transform' }
+        : { yPercent: 0, duration: 1.4, stagger: 0.07 }, 0.15)
+      .to('.hero__arch', lightMotion
+        ? { opacity: 1, y: 0, duration: 1.4, clearProps: 'opacity,transform' }
+        : { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut', clearProps: 'clipPath' }, 0.1)
       .to('.hero__arch img', { scale: 1.06, duration: 2.4 }, 0.3)
       .to('.hero__arch-line', { opacity: 1, duration: 1.6 }, 1.0)
       .to('.hero__inset', { opacity: 1, y: 0, duration: 1.4 }, 0.9)
@@ -551,31 +713,41 @@
     });
   }
   let introPlayed = false;
-  const playIntro = () => { if (!introPlayed) { introPlayed = true; intro(); } };
+  const heroImg = $('.hero__arch img');
+  const playIntro = () => {
+    if (introPlayed) return;
+    introPlayed = true;
+    // Decode the photo up front – otherwise the phone decodes it mid-animation and the reveal stalls.
+    Promise.race([heroImg?.decode?.(), new Promise((resolve) => setTimeout(resolve, 600))])
+      .catch(() => {})
+      .then(intro);
+  };
   if (document.readyState === 'complete') setTimeout(playIntro, 300);
   else window.addEventListener('load', () => setTimeout(playIntro, 200));
   setTimeout(playIntro, 2500); // never keep people waiting on slow images
 
   if (reducedMotion) return;
 
-  /* ---------- Section headings: word-by-word reveal ---------- */
-  $$('[data-split]').forEach((el) => {
-    if (el.classList.contains('hero__title')) return;
-    const words = splitWords(el);
-    gsap.from(words, {
-      yPercent: 115, duration: 1.2, ease: 'expo.out', stagger: 0.05,
-      scrollTrigger: { trigger: el, start: 'top 85%' },
+  /* ---------- Section headings: word-by-word reveal (desktop) ---------- */
+  if (!lightMotion) {
+    $$('[data-split]').forEach((el) => {
+      if (el.classList.contains('hero__title')) return;
+      const words = splitWords(el);
+      gsap.from(words, {
+        yPercent: 115, duration: 1.2, ease: 'expo.out', stagger: 0.05,
+        scrollTrigger: { trigger: el, start: 'top 85%' },
+      });
     });
-  });
 
-  /* ---------- About paragraph lights up as you scroll ---------- */
-  $$('[data-scrub-text]').forEach((el) => {
-    const words = splitWords(el, false);
-    gsap.fromTo(words, { opacity: 0.15 }, {
-      opacity: 1, stagger: 0.1, ease: 'none',
-      scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 50%', scrub: true },
+    /* ---------- About paragraph lights up word by word as you scroll (desktop) ---------- */
+    $$('[data-scrub-text]').forEach((el) => {
+      const words = splitWords(el, false);
+      gsap.fromTo(words, { opacity: 0.15 }, {
+        opacity: 1, stagger: 0.1, ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 50%', scrub: true },
+      });
     });
-  });
+  }
 
   /* ---------- Generic fade-up reveals ---------- */
   const fadeUp = (selector, opts = {}) => {
@@ -593,6 +765,8 @@
   fadeUp('.contact__list li, .contact__card');
   fadeUp('.process__step');
   fadeUp('.band .btn');
+  // Phones: headings and the About paragraph rise in as whole blocks (see lightMotion above)
+  if (lightMotion) fadeUp('[data-split]:not(.hero__title), [data-scrub-text]');
 
   /* ---------- Gallery images: simple pop-in ---------- */
   // Photos start hidden (so none flash fully visible before their turn) and each one
@@ -683,7 +857,21 @@
 
   /* ---------- Marquee: speeds up and flips with scroll direction ---------- */
   const marquee = $('[data-marquee]');
-  if (marquee) {
+  if (marquee && !canHover && marquee.getAnimations) {
+    // Touch screens: a CSS animation instead of a per-frame tween. Its speed is only
+    // touched when scrolling starts, stops or changes direction, not every frame.
+    root.classList.add('css-marquee');
+    const [loop] = marquee.getAnimations();
+    let settle;
+    const setRate = (rate) => { if (loop && loop.playbackRate !== rate) loop.updatePlaybackRate(rate); };
+    ScrollTrigger.create({
+      onUpdate: (self) => {
+        setRate(self.direction * 2.5);
+        clearTimeout(settle);
+        settle = setTimeout(() => setRate(self.direction), 250);
+      },
+    });
+  } else if (marquee) {
     const loop = gsap.to(marquee, { xPercent: -50, ease: 'none', duration: 32, repeat: -1 });
     loop.totalTime(loop.duration() * 100); // allow playing backwards
     let boost = 0, direction = 1;
@@ -709,9 +897,14 @@
       window.dispatchEvent(new CustomEvent('rs:grow', { detail: { progress } }));
       bar.style.transform = `scaleX(${progress})`;
     };
+    let activeIndex = 0;
+    // Returns true when a different step became active.
     const highlightStep = (progress) => {
       const index = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+      if (index === activeIndex) return false;
+      activeIndex = index;
       steps.forEach((s, i) => s.classList.toggle('is-active', i === index));
+      return true;
     };
     const mm = gsap.matchMedia();
     // Pin with ScrollTrigger rather than CSS sticky – sticky content visibly lags a
@@ -730,17 +923,23 @@
         },
       });
     });
-    // Phones: the section pins too, and the step cards (one row) slide sideways as the tree grows.
+    // Phones: the section pins too, and the step cards (one row) glide over to each new
+    // step as the tree grows. One tween per step change rather than one per scroll frame,
+    // kept on the GPU (force3D) so it never drops back to repainting between tweens.
     mm.add('(max-width: 900px)', () => {
       const track = $('.process__steps', process);
-      const slideTo = gsap.quickTo(track, 'x', { duration: 0.5, ease: 'power3.out' }); // one reusable tween
+      const slide = (index, duration) => gsap.to(track, {
+        x: -Math.min(steps[index].offsetLeft - steps[0].offsetLeft, track.scrollWidth - track.clientWidth),
+        duration, ease: 'power3.out', force3D: true, overwrite: true,
+      });
+      slide(activeIndex, 0);
       ScrollTrigger.create({
         ...pin(2.6),
         onUpdate: (self) => {
           publish(self.progress);
-          highlightStep(self.progress);
-          slideTo(-self.progress * Math.max(0, track.scrollWidth - track.clientWidth));
+          if (highlightStep(self.progress)) slide(activeIndex, 0.6);
         },
+        onRefresh: () => slide(activeIndex, 0),
       });
       return () => gsap.set(track, { clearProps: 'x' });
     });

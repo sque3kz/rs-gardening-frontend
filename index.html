@@ -1,20 +1,23 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="sk">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>R&amp;S Gardening · Gardens crafted with care</title>
-  <meta name="description" content="R&amp;S Gardening – garden design, landscaping, lawn care and year-round garden maintenance.">
+  <title>R&amp;S Gardening · Záhrady tvorené s láskou</title>
+  <meta name="description" content="R&amp;S Gardening – návrh a realizácia záhrad, starostlivosť o trávnik a celoročná údržba záhrad.">
   <meta name="theme-color" content="#0e2419">
   <meta property="og:title" content="R&amp;S Gardening">
-  <meta property="og:description" content="Garden design, landscaping and maintenance by R&amp;S Gardening.">
+  <meta property="og:description" content="Návrh, realizácia a údržba záhrad – R&amp;S Gardening.">
   <meta property="og:type" content="website">
+  <link rel="alternate" hreflang="sk" href="./">
+  <link rel="alternate" hreflang="en" href="en/">
+  
   <link rel="icon" href="static/core/img/favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,700..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Young+Serif&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="stylesheet" href="static/core/css/main.css">
 
@@ -30,7 +33,7 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Preskočiť na obsah</a>
   
 <div class="preloader" aria-hidden="true">
   <div class="preloader__mark">
@@ -41,20 +44,20 @@
 
 <header class="nav" data-nav>
   <div class="nav__inner">
-    <a href="#top" class="nav__logo" aria-label="R&amp;S Gardening – home">
+    <a href="#top" class="nav__logo" aria-label="R&amp;S Gardening – domov">
       <span class="nav__logo-mark">
         <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50c0-20 14-32 36-34-1 20-13 34-35 34" fill="currentColor"/><path d="M14 50c7-12 16-19 26-25" stroke="var(--forest-900)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
       </span>
       <span class="nav__logo-text">RSGardening</span>
     </a>
 
-    <nav class="nav__links" aria-label="Main">
+    <nav class="nav__links" aria-label="Hlavná navigácia">
       <span class="nav__indicator" aria-hidden="true"></span>
-      <a href="#about" data-nav-link>About</a>
-      <a href="#services" data-nav-link>Services</a>
-      <a href="#process" data-nav-link>Process</a>
-      <a href="#work" data-nav-link>Our work</a>
-      <a href="#reviews" data-nav-link>Reviews</a>
+      <a href="#about" data-nav-link>O nás</a>
+      <a href="#services" data-nav-link>Služby</a>
+      <a href="#process" data-nav-link>Postup</a>
+      <a href="#work" data-nav-link>Realizácie</a>
+      <a href="#reviews" data-nav-link>Recenzie</a>
     </nav>
 
     <div class="nav__actions">
@@ -63,8 +66,8 @@
 
 </svg>
 <span>+421 918 761 056</span></a>
-      <a href="#contact" class="btn btn--sun btn--sm magnetic">Free quote</a>
-      <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-burger>
+      <a href="#contact" class="btn btn--sun btn--sm magnetic">Cenová ponuka</a>
+      <button class="nav__burger" type="button" aria-label="Otvoriť menu" aria-expanded="false" aria-controls="mobile-menu" data-burger>
         <span></span><span></span>
       </button>
     </div>
@@ -72,17 +75,29 @@
 </header>
 
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
-  <nav aria-label="Mobile">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#process">Process</a>
-    <a href="#work">Our work</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
+  <nav aria-label="Mobilná navigácia">
+    <a href="#about">O nás</a>
+    <a href="#services">Služby</a>
+    <a href="#process">Postup</a>
+    <a href="#work">Realizácie</a>
+    <a href="#reviews">Recenzie</a>
+    <a href="#contact">Kontakt</a>
   </nav>
   <div class="mobile-menu__footer">
-    <a href="tel:+421918761056">+421 918 761 056</a>
-    <a href="mailto:hello@rsgardening.example">hello@rsgardening.example</a>
+    <a class="mobile-menu__contact mobile-menu__contact--call" href="tel:+421918761056">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+
+</svg>
+<span><strong>Zavolajte nám</strong><small>+421 918 761 056</small></span>
+    </a>
+    <a class="mobile-menu__contact mobile-menu__contact--mail" href="mailto:info@rsgardening.com">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 7l-10 6L2 7"/>
+
+</svg>
+<span><strong>Napíšte nám</strong><small>info@rsgardening.com</small></span>
+    </a>
   </div>
 </div>
 
@@ -117,44 +132,45 @@
 
     <div class="hero__inner container">
       <div class="hero__content">
-        <p class="eyebrow eyebrow--light hero__eyebrow"><span class="dot"></span> Landscaping &amp; garden care</p>
+        <p class="eyebrow eyebrow--light hero__eyebrow"><span class="dot"></span> Realizácia &amp; údržba záhrad</p>
         <h1 class="hero__title" data-split>
-          Gardens that <em>grow</em> with&nbsp;you.
+          Záhrady, ktoré <em>rastú</em> s&nbsp;vami.
         </h1>
         <p class="hero__lead">
-          R&amp;S Gardening designs, builds and looks after outdoor spaces that feel effortless –
-          from crisp lawns and colourful borders to complete garden transformations.
+          R&amp;S Gardening navrhuje, realizuje a udržiava záhrady, v ktorých sa budete cítiť dobre – od upravených trávnikov a farebných záhonov až po kompletné premeny záhrad.
         </p>
         <div class="hero__cta">
-          <a href="#contact" class="btn btn--sun magnetic">Get a free quote <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <a href="#contact" class="btn btn--sun magnetic">Cenová ponuka zdarma <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
 </a>
-          <a href="#work" class="btn btn--ghost">See our work</a>
+          <a href="#work" class="btn btn--ghost">Naše realizácie</a>
         </div>
         <ul class="hero__trust">
           
           <li>
-            <strong>5.0</strong>
-            <span><span class="stars" role="img" aria-label="5.0 out of 5 stars"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
-<small>Client rating</small></span>
+            <strong>5,0</strong>
+            <span><span class="stars" role="img" aria-label="5,0 z 5 hviezdičiek"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+<small>Hodnotenie klientov</small></span>
           </li>
           
-          <li><strong>12+</strong><span><small>years growing<br>beautiful gardens</small></span></li>
+          <li><strong>4+</strong><span><small>roky tvoríme<br>krásne záhrady</small></span></li>
         </ul>
       </div>
 
       <div class="hero__visual">
         <div class="hero__arch-line" aria-hidden="true"></div>
         <figure class="hero__arch" data-depth="-10">
-          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1000&h=1300&q=80&auto=format&fit=crop" alt="A brick garden path lined with flowering shrubs and clipped hedges" fetchpriority="high">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1000&h=1300&q=80&auto=format&fit=crop"
+               srcset="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=640&h=832&q=80&auto=format&fit=crop 640w, https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1000&h=1300&q=80&auto=format&fit=crop 1000w"
+               sizes="(max-width: 900px) 75vw, 440px" alt="Tehlový chodník lemovaný kvitnúcimi kríkmi a strihanými živými plotmi" fetchpriority="high">
         </figure>
         <figure class="hero__inset" data-depth="-22">
-          <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=500&h=620&q=80&auto=format&fit=crop" alt="Young seedlings growing in pots">
+          <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=500&h=620&q=80&auto=format&fit=crop" alt="Mladé priesady v kvetináčoch">
         </figure>
-        <div class="hero__badge hero__badge--a"><span class="hero__badge-icon">🌿</span><span><strong>Eco-friendly</strong><small>Peat-free &amp; organic</small></span></div>
-        <div class="hero__badge hero__badge--b"><span class="hero__badge-icon">✦</span><span><strong>Fully insured</strong><small>Tidy, reliable team</small></span></div>
+        <div class="hero__badge hero__badge--a"><span class="hero__badge-icon">🌿</span><span><strong>Šetrní k prírode</strong><small>Bez rašeliny &amp; organicky</small></span></div>
+        <div class="hero__badge hero__badge--b"><span class="hero__badge-icon">✦</span><span><strong>Plne poistení</strong><small>Poriadny a spoľahlivý tím</small></span></div>
       </div>
     </div>
   </section>
@@ -164,11 +180,11 @@
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track" data-marquee>
         
-        <span>Garden Design</span><i>✦</i><span>Lawn Care</span><i>✦</i><span>Planting</span><i>✦</i>
-        <span>Hedge Trimming</span><i>✦</i><span>Patios &amp; Paving</span><i>✦</i><span>Maintenance</span><i>✦</i>
+        <span>Návrh záhrad</span><i>✦</i><span>Starostlivosť o trávnik</span><i>✦</i><span>Výsadba</span><i>✦</i>
+        <span>Strihanie živých plotov</span><i>✦</i><span>Altánky</span><i>✦</i><span>Údržba</span><i>✦</i>
         
-        <span>Garden Design</span><i>✦</i><span>Lawn Care</span><i>✦</i><span>Planting</span><i>✦</i>
-        <span>Hedge Trimming</span><i>✦</i><span>Patios &amp; Paving</span><i>✦</i><span>Maintenance</span><i>✦</i>
+        <span>Návrh záhrad</span><i>✦</i><span>Starostlivosť o trávnik</span><i>✦</i><span>Výsadba</span><i>✦</i>
+        <span>Strihanie živých plotov</span><i>✦</i><span>Altánky</span><i>✦</i><span>Údržba</span><i>✦</i>
         
       </div>
     </div>
@@ -179,37 +195,34 @@
     <div class="container about__grid">
       <div class="about__media">
         <figure class="about__img about__img--main" data-parallax="-8">
-          <img src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?w=1000&q=80&auto=format&fit=crop" alt="Gloved hands planting a young seedling" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?w=1000&q=80&auto=format&fit=crop" alt="Ruky v rukaviciach sadia mladú priesadu" loading="lazy">
         </figure>
         <figure class="about__img about__img--small" data-parallax="-30">
-          <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?w=700&q=80&auto=format&fit=crop" alt="Gardener planting out a bed" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?w=700&q=80&auto=format&fit=crop" alt="Záhradník vysádza záhon" loading="lazy">
         </figure>
         <div class="about__stamp" aria-hidden="true">
           <svg viewBox="0 0 200 200">
             <defs><path id="circlePath" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0"/></defs>
-            <text><textPath href="#circlePath">ROOTED IN CRAFT · GROWN WITH CARE · </textPath></text>
+            <text><textPath href="#circlePath">POCTIVÉ REMESLO · S LÁSKOU K ZÁHRADÁM · </textPath></text>
           </svg>
           <span>R&amp;S</span>
         </div>
       </div>
 
       <div class="about__content">
-        <p class="eyebrow">About us</p>
-        <h2 class="section-title" data-split>Rooted in craft, <em>grown</em> with care.</h2>
+        <p class="eyebrow">O nás</p>
+        <h2 class="section-title" data-split>Poctivé remeslo, záhrady <em>pestované</em> s láskou.</h2>
         <p class="about__lead" data-scrub-text>
-          R&amp;S Gardening started with two people, a van full of tools and a simple belief: every garden,
-          however big or small, deserves to be loved. Today we bring the same hands-on care to every project –
-          designing, building and nurturing spaces that come alive through every season.
+          Firma R&amp;S Gardening vznikla ako rodinný podnik s jednoduchým presvedčením: každá záhrada, veľká či malá, si zaslúži lásku. S rovnakou osobnou starostlivosťou dnes pristupujeme ku každému projektu. Navrhujeme, budujeme a pestujeme priestory, ktoré ožívajú v každom ročnom období.
         </p>
         <p class="about__body">
-          We're a small, close-knit team of gardeners and landscapers who sweat the details. We turn up when we say
-          we will, leave every site spotless and only recommend what your garden genuinely needs.
+          Hoci sme odvtedy vyrástli, naše hodnoty zostali rovnaké. Postaráme sa o kompletnú realizáciu vašej záhrady a dotvoríme ju drevenými domčekmi, altánkami či terasami, ktoré vám budú prinášať radosť a pohodlie po mnoho rokov. Zakladáme si na priateľskom a férovom prístupe, a preto sa k nám zákazníci radi vracajú.
         </p>
 
         <dl class="stats">
-          <div class="stat"><dt>Years experience</dt><dd><span data-count="12">12</span>+</dd></div>
-          <div class="stat"><dt>Gardens transformed</dt><dd><span data-count="650">650</span>+</dd></div>
-          <div class="stat"><dt>Repeat clients</dt><dd><span data-count="92">92</span>%</dd></div>
+          <div class="stat"><dt>Roky skúseností</dt><dd><span data-count="4">4</span>+</dd></div>
+          <div class="stat"><dt>Premenených záhrad</dt><dd><span data-count="150">150</span>+</dd></div>
+          <div class="stat"><dt>Stálych klientov</dt><dd><span data-count="95">95</span>%</dd></div>
         </dl>
       </div>
     </div>
@@ -219,9 +232,9 @@
   <section class="services section section--dark" id="services">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow eyebrow--light">What we do</p>
-        <h2 class="section-title" data-split>Everything your garden <em>needs</em>.</h2>
-        <p class="section-head__lead">From a one-off tidy to a full redesign, we handle every part of the job so you can simply enjoy the result.</p>
+        <p class="eyebrow eyebrow--light">Čo robíme</p>
+        <h2 class="section-title" data-split>Všetko, čo vaša záhrada <em>potrebuje</em>.</h2>
+        <p class="section-head__lead">Od jednorazového upratania po kompletnú prestavbu – postaráme sa o každú časť práce, aby ste si mohli jednoducho užívať výsledok.</p>
       </div>
 
       <div class="services__grid">
@@ -236,23 +249,23 @@
 
 </svg>
 </div>
-          <h3>Garden Design</h3>
-          <p>Bespoke layouts that turn your outdoor space into a place you never want to leave.</p>
+          <h3>Návrh záhrad</h3>
+          <p>Návrhy na mieru, vďaka ktorým sa z vášho exteriéru stane miesto, odkiaľ sa vám nebude chcieť odísť.</p>
           
           <ul>
             <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Site survey &amp; 3D concept</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Zameranie pozemku a 3D návrh</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Planting plans</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Výsadbové plány</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Project management</li>
+Vedenie projektu</li>
           </ul>
           
         </article>
@@ -265,23 +278,23 @@ Project management</li>
 
 </svg>
 </div>
-          <h3>Lawn Care</h3>
-          <p>Lush, healthy turf all year – from new lawns to scarifying, feeding and repair.</p>
+          <h3>Starostlivosť o trávnik</h3>
+          <p>Hustý a zdravý trávnik po celý rok – od zakladania nových trávnikov po vertikutáciu, hnojenie a opravy.</p>
           
           <ul>
             <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Turfing &amp; seeding</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Kobercový trávnik a výsev</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Scarifying &amp; aeration</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Vertikutácia a prevzdušnenie</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Seasonal feeding</li>
+Sezónne hnojenie</li>
           </ul>
           
         </article>
@@ -294,23 +307,23 @@ Seasonal feeding</li>
 
 </svg>
 </div>
-          <h3>Hedge &amp; Tree Work</h3>
-          <p>Crisp hedges and well-shaped trees, trimmed safely and tidied away.</p>
+          <h3>Živé ploty a stromy</h3>
+          <p>Úhľadné živé ploty a pekne tvarované stromy – bezpečne orezané a po práci uprataté.</p>
           
           <ul>
             <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Hedge trimming &amp; shaping</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Strihanie a tvarovanie živých plotov</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Crown reduction</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Redukcia koruny</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Green-waste removal</li>
+Odvoz zeleného odpadu</li>
           </ul>
           
         </article>
@@ -327,23 +340,23 @@ Green-waste removal</li>
 
 </svg>
 </div>
-          <h3>Planting &amp; Borders</h3>
-          <p>Colourful, low-fuss borders chosen for your soil, light and lifestyle.</p>
+          <h3>Výsadba a záhony</h3>
+          <p>Farebné záhony nenáročné na údržbu, vybrané podľa vašej pôdy, svetla a životného štýlu.</p>
           
           <ul>
             <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Seasonal displays</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Sezónne výsadby</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Perennial borders</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Trvalkové záhony</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Vegetable beds</li>
+Zeleninové záhony</li>
           </ul>
           
         </article>
@@ -352,27 +365,27 @@ Vegetable beds</li>
           <div class="service-card__glow" aria-hidden="true"></div>
           <span class="service-card__num">05</span>
           <div class="service-card__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/>
+<path d="M2 10l10-6 10 6"/><path d="M2 10h20"/><path d="M5 10v11"/><path d="M19 10v11"/><path d="M3 21h18"/><path d="M8 15h8"/>
 
 </svg>
 </div>
-          <h3>Patios &amp; Paving</h3>
-          <p>Hard landscaping built to last – patios, paths, edging and raised beds.</p>
+          <h3>Altánky</h3>
+          <p>Altánky na mieru – útulné a tienisté miesto na posedenie v záhrade, postavené tak, aby vydržalo roky.</p>
           
           <ul>
             <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Natural stone &amp; porcelain</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Návrh na mieru</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Gravel paths</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Drevené altánky a pergoly</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Sleeper beds</li>
+Kompletná montáž</li>
           </ul>
           
         </article>
@@ -385,23 +398,23 @@ Sleeper beds</li>
 
 </svg>
 </div>
-          <h3>Garden Maintenance</h3>
-          <p>Regular visits that keep everything looking its best, whatever the season.</p>
+          <h3>Údržba záhrad</h3>
+          <p>Pravidelné návštevy, vďaka ktorým bude všetko vyzerať skvele v každom ročnom období.</p>
           
           <ul>
             <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Weekly or fortnightly visits</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Návštevy každý týždeň alebo dva</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Weeding &amp; pruning</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+Pletie a orez</li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
-Autumn &amp; spring clear-ups</li>
+Jarné a jesenné upratovanie</li>
           </ul>
           
         </article>
@@ -417,28 +430,28 @@ Autumn &amp; spring clear-ups</li>
     <div class="process__sticky">
       <div class="container process__grid">
         <div class="process__visual">
-          <canvas class="process__canvas" data-grow-canvas aria-label="A 3D tree growing from a pot as you scroll" role="img"></canvas>
+          <canvas class="process__canvas" data-grow-canvas aria-label="3D strom, ktorý pri posúvaní stránky vyrastie z kvetináča" role="img"></canvas>
           <div class="process__progress" aria-hidden="true"><span data-process-bar></span></div>
         </div>
         <div class="process__content">
-          <p class="eyebrow">How we work</p>
-          <h2 class="section-title">From seed to <em>stunning</em>.</h2>
+          <p class="eyebrow">Ako pracujeme</p>
+          <h2 class="section-title">Od semienka po <em>nádheru</em>.</h2>
           <ol class="process__steps">
             <li class="process__step is-active" data-step>
               <span class="process__step-num">01</span>
-              <div><h3>Free consultation</h3><p>We visit, listen to how you want to use your space and take a careful look at soil, light and drainage.</p></div>
+              <div><h3>Bezplatná konzultácia</h3><p>Prídeme k vám, vypočujeme si, ako chcete priestor využívať, a dôkladne posúdime pôdu, svetlo a odvodnenie.</p></div>
             </li>
             <li class="process__step" data-step>
               <span class="process__step-num">02</span>
-              <div><h3>Design &amp; quote</h3><p>You get a clear plan and a fixed, itemised quote – no surprises, no pressure.</p></div>
+              <div><h3>Návrh &amp; cenová ponuka</h3><p>Dostanete jasný plán a pevnú, rozpísanú cenovú ponuku – bez prekvapení a bez nátlaku.</p></div>
             </li>
             <li class="process__step" data-step>
               <span class="process__step-num">03</span>
-              <div><h3>Build &amp; plant</h3><p>Our team brings it to life with quality materials, then leaves everything spotless.</p></div>
+              <div><h3>Realizácia &amp; výsadba</h3><p>Náš tím všetko zrealizuje z kvalitných materiálov a po sebe nechá dokonalý poriadok.</p></div>
             </li>
             <li class="process__step" data-step>
               <span class="process__step-num">04</span>
-              <div><h3>Nurture</h3><p>Optional maintenance visits keep your garden thriving and looking its best all year.</p></div>
+              <div><h3>Starostlivosť</h3><p>Voliteľné pravidelné návštevy udržia vašu záhradu zdravú a krásnu po celý rok.</p></div>
             </li>
           </ol>
         </div>
@@ -451,20 +464,20 @@ Autumn &amp; spring clear-ups</li>
     <div class="container">
       <div class="section-head section-head--split">
         <div>
-          <p class="eyebrow">Our work</p>
-          <h2 class="section-title" data-split>Recent <em>transformations</em>.</h2>
+          <p class="eyebrow">Realizácie</p>
+          <h2 class="section-title" data-split>Nedávne <em>premeny</em>.</h2>
         </div>
         
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button type="button" class="filter is-active" data-filter="all" data-total="11" data-more-href="work/" aria-pressed="true">All</button>
+        <div class="filters" role="group" aria-label="Filtrovať projekty">
+          <button type="button" class="filter is-active" data-filter="all" data-total="11" data-more-href="work/" aria-pressed="true">Všetko</button>
           
-          <button type="button" class="filter" data-filter="design" data-total="2" data-more-href="work/design/" aria-pressed="false">Design</button>
+          <button type="button" class="filter" data-filter="design" data-total="2" data-more-href="work/design/" aria-pressed="false">Návrhy</button>
           
-          <button type="button" class="filter" data-filter="lawn" data-total="2" data-more-href="work/lawn/" aria-pressed="false">Lawns</button>
+          <button type="button" class="filter" data-filter="lawn" data-total="2" data-more-href="work/lawn/" aria-pressed="false">Trávniky</button>
           
-          <button type="button" class="filter" data-filter="planting" data-total="5" data-more-href="work/planting/" aria-pressed="false">Planting</button>
+          <button type="button" class="filter" data-filter="planting" data-total="5" data-more-href="work/planting/" aria-pressed="false">Výsadba</button>
           
-          <button type="button" class="filter" data-filter="hardscape" data-total="2" data-more-href="work/hardscape/" aria-pressed="false">Hardscaping</button>
+          <button type="button" class="filter" data-filter="hardscape" data-total="2" data-more-href="work/hardscape/" aria-pressed="false">Spevnené plochy</button>
           
         </div>
         
@@ -473,133 +486,133 @@ Autumn &amp; spring clear-ups</li>
       <div class="gallery" data-gallery>
         
         <figure class="gallery__item" data-category="design" style="--area: 1 / 1 / span 5 / span 4; --area-m: 1 / 1 / span 3 / span 4">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Cottage Garden Revival">
-    <img src="https://images.unsplash.com/photo-1557429287-b2e26467fc2b?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Cottage Garden Revival" loading="lazy" decoding="async">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Obnova vidieckej záhrady">
+    <img src="https://images.unsplash.com/photo-1557429287-b2e26467fc2b?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Obnova vidieckej záhrady" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Design</span>
-    <strong>Cottage Garden Revival</strong>
-    <small>Full redesign</small>
+    <span class="gallery__tag">Návrhy</span>
+    <strong>Obnova vidieckej záhrady</strong>
+    <small>Kompletná prestavba</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="hardscape" style="--area: 1 / 5 / span 3 / span 5; --area-m: 4 / 1 / span 2 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Wisteria Walkway">
-    <img src="https://images.unsplash.com/photo-1558293842-c0fd3db86157?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Wisteria Walkway" loading="lazy" decoding="async">
+        <figure class="gallery__item" data-category="hardscape" style="--area: 1 / 5 / span 3 / span 5; --area-m: 4 / 1 / span 3 / span 2">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Chodník s glycíniou">
+    <img src="https://images.unsplash.com/photo-1558293842-c0fd3db86157?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Chodník s glycíniou" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Hardscaping</span>
-    <strong>Wisteria Walkway</strong>
-    <small>Pergola &amp; gravel path</small>
+    <span class="gallery__tag">Spevnené plochy</span>
+    <strong>Chodník s glycíniou</strong>
+    <small>Pergola a štrkový chodník</small>
   </figcaption>
 </figure>
 
         
         <figure class="gallery__item" data-category="design" style="--area: 1 / 10 / span 3 / span 3; --area-m: 4 / 3 / span 2 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Woodland Retreat">
-    <img src="https://images.unsplash.com/photo-1598902108854-10e335adac99?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Woodland Retreat" loading="lazy" decoding="async">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Lesné útočisko">
+    <img src="https://images.unsplash.com/photo-1598902108854-10e335adac99?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Lesné útočisko" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Design</span>
-    <strong>Woodland Retreat</strong>
-    <small>Naturalistic planting</small>
+    <span class="gallery__tag">Návrhy</span>
+    <strong>Lesné útočisko</strong>
+    <small>Prírodná výsadba</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="lawn" style="--area: 4 / 5 / span 2 / span 4; --area-m: 6 / 1 / span 3 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Contemporary Lawn &amp; Terrace">
-    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Contemporary Lawn &amp; Terrace" loading="lazy" decoding="async">
+        <figure class="gallery__item" data-category="lawn" style="--area: 4 / 5 / span 2 / span 4; --area-m: 6 / 3 / span 3 / span 2">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Moderný trávnik a terasa">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Moderný trávnik a terasa" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Lawns</span>
-    <strong>Contemporary Lawn &amp; Terrace</strong>
-    <small>Lawn &amp; terrace</small>
+    <span class="gallery__tag">Trávniky</span>
+    <strong>Moderný trávnik a terasa</strong>
+    <small>Trávnik a terasa</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="planting" style="--area: 4 / 9 / span 2 / span 4; --area-m: 6 / 3 / span 2 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Kitchen Garden Beds">
-    <img src="https://images.unsplash.com/photo-1584479898061-15742e14f50d?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Kitchen Garden Beds" loading="lazy" decoding="async">
+        <figure class="gallery__item" data-category="planting" style="--area: 4 / 9 / span 2 / span 4; --area-m: 7 / 1 / span 2 / span 2">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Záhony úžitkovej záhrady">
+    <img src="https://images.unsplash.com/photo-1584479898061-15742e14f50d?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Záhony úžitkovej záhrady" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Planting</span>
-    <strong>Kitchen Garden Beds</strong>
-    <small>Productive garden</small>
+    <span class="gallery__tag">Výsadba</span>
+    <strong>Záhony úžitkovej záhrady</strong>
+    <small>Úžitková záhrada</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="lawn" style="--area: 6 / 9 / span 5 / span 4; --area-m: 8 / 3 / span 3 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Fresh Family Lawn">
-    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Fresh Family Lawn" loading="lazy" decoding="async">
+        <figure class="gallery__item is-phone-hidden" data-category="lawn" style="--area: 6 / 9 / span 5 / span 4">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Nový rodinný trávnik">
+    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Nový rodinný trávnik" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Lawns</span>
-    <strong>Fresh Family Lawn</strong>
-    <small>New turf</small>
+    <span class="gallery__tag">Trávniky</span>
+    <strong>Nový rodinný trávnik</strong>
+    <small>Nový kobercový trávnik</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="hardscape" style="--area: 6 / 1 / span 3 / span 3; --area-m: 9 / 1 / span 2 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Rose Path &amp; Hedging">
-    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Rose Path &amp; Hedging" loading="lazy" decoding="async">
+        <figure class="gallery__item is-phone-hidden" data-category="hardscape" style="--area: 6 / 1 / span 3 / span 3">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Ružový chodník a živý plot">
+    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Ružový chodník a živý plot" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Hardscaping</span>
-    <strong>Rose Path &amp; Hedging</strong>
-    <small>Brick path &amp; box hedging</small>
+    <span class="gallery__tag">Spevnené plochy</span>
+    <strong>Ružový chodník a živý plot</strong>
+    <small>Tehlový chodník a buxusový lem</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="planting" style="--area: 6 / 4 / span 3 / span 5; --area-m: 11 / 1 / span 4 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Raised Vegetable Plots">
-    <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Raised Vegetable Plots" loading="lazy" decoding="async">
+        <figure class="gallery__item is-phone-hidden" data-category="planting" style="--area: 6 / 4 / span 3 / span 5">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Vyvýšené zeleninové záhony">
+    <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Vyvýšené zeleninové záhony" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Planting</span>
-    <strong>Raised Vegetable Plots</strong>
-    <small>Sleeper beds</small>
+    <span class="gallery__tag">Výsadba</span>
+    <strong>Vyvýšené zeleninové záhony</strong>
+    <small>Záhony z podvalov</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="planting" style="--area: 9 / 1 / span 2 / span 4; --area-m: 11 / 3 / span 2 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Spring Planting">
-    <img src="https://images.unsplash.com/photo-1621460248083-6271cc4437a8?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Spring Planting" loading="lazy" decoding="async">
+        <figure class="gallery__item is-phone-hidden" data-category="planting" style="--area: 9 / 1 / span 2 / span 4">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Jarná výsadba">
+    <img src="https://images.unsplash.com/photo-1621460248083-6271cc4437a8?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Jarná výsadba" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Planting</span>
-    <strong>Spring Planting</strong>
-    <small>Seasonal borders</small>
+    <span class="gallery__tag">Výsadba</span>
+    <strong>Jarná výsadba</strong>
+    <small>Sezónne záhony</small>
   </figcaption>
 </figure>
 
         
-        <figure class="gallery__item" data-category="planting" style="--area: 9 / 5 / span 2 / span 4; --area-m: 13 / 3 / span 2 / span 2">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Propagation Bench">
-    <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Propagation Bench" loading="lazy" decoding="async">
+        <figure class="gallery__item is-phone-hidden" data-category="planting" style="--area: 9 / 5 / span 2 / span 4">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Pestovanie priesad">
+    <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Pestovanie priesad" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Planting</span>
-    <strong>Propagation Bench</strong>
-    <small>Home-grown seedlings</small>
+    <span class="gallery__tag">Výsadba</span>
+    <strong>Pestovanie priesad</strong>
+    <small>Vlastné priesady</small>
   </figcaption>
 </figure>
 
         
         <figure class="gallery__item is-hidden" data-category="planting">
-  <button type="button" class="gallery__btn" data-lightbox aria-label="View Soil Improvement">
-    <img src="https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Soil Improvement" loading="lazy" decoding="async">
+  <button type="button" class="gallery__btn" data-lightbox aria-label="Zobraziť: Zlepšenie pôdy">
+    <img src="https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Zlepšenie pôdy" loading="lazy" decoding="async">
   </button>
   <figcaption>
-    <span class="gallery__tag">Planting</span>
-    <strong>Soil Improvement</strong>
-    <small>Bed preparation</small>
+    <span class="gallery__tag">Výsadba</span>
+    <strong>Zlepšenie pôdy</strong>
+    <small>Príprava záhonov</small>
   </figcaption>
 </figure>
 
@@ -607,24 +620,24 @@ Autumn &amp; spring clear-ups</li>
       </div>
 
       <div class="work__more" data-gallery-more>
-        <a href="work/" class="text-link" data-gallery-more-link>Show more <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <a href="work/" class="text-link" data-gallery-more-link>Zobraziť viac <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
 </a>
       </div>
     </div>
-    <script id="gallery-layouts" type="application/json">{"desktop": {"1": [[1, 1, 12, 4]], "2": [[1, 1, 7, 5], [8, 1, 5, 5]], "3": [[1, 1, 7, 5], [8, 1, 5, 3], [8, 4, 5, 2]], "4": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2]], "5": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2]], "6": [[1, 1, 7, 5], [8, 1, 5, 3], [8, 4, 5, 2], [1, 6, 4, 3], [5, 6, 4, 3], [9, 6, 4, 3]], "7": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2], [1, 6, 5, 3], [6, 6, 3, 3], [9, 6, 4, 3]], "8": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2], [1, 6, 5, 3], [6, 6, 3, 3], [9, 6, 4, 3]], "9": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2], [9, 6, 4, 5], [1, 6, 3, 3], [4, 6, 5, 3], [1, 9, 4, 2], [5, 9, 4, 2]], "10": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2], [9, 6, 4, 5], [1, 6, 3, 3], [4, 6, 5, 3], [1, 9, 4, 2], [5, 9, 4, 2]]}, "mobile": {"1": [[1, 1, 4, 4]], "2": [[1, 1, 2, 4], [3, 1, 2, 4]], "3": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2]], "4": [[1, 1, 2, 3], [3, 1, 2, 2], [3, 3, 2, 3], [1, 4, 2, 2]], "5": [[1, 1, 4, 3], [1, 4, 2, 3], [3, 4, 2, 2], [3, 6, 2, 3], [1, 7, 2, 2]], "6": [[1, 1, 2, 4], [3, 1, 2, 2], [3, 3, 2, 2], [1, 5, 4, 3], [1, 8, 2, 2], [3, 8, 2, 2]], "7": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2]], "8": [[1, 1, 2, 3], [3, 1, 2, 2], [3, 3, 2, 3], [1, 4, 2, 2], [1, 6, 4, 3], [1, 9, 2, 4], [3, 9, 2, 2], [3, 11, 2, 2]], "9": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2], [1, 11, 2, 4], [3, 11, 2, 4]], "10": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2], [1, 11, 2, 4], [3, 11, 2, 2], [3, 13, 2, 2]]}}</script>
+    <script id="gallery-layouts" type="application/json">{"desktop": {"1": [[1, 1, 12, 4]], "2": [[1, 1, 7, 5], [8, 1, 5, 5]], "3": [[1, 1, 7, 5], [8, 1, 5, 3], [8, 4, 5, 2]], "4": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2]], "5": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2]], "6": [[1, 1, 7, 5], [8, 1, 5, 3], [8, 4, 5, 2], [1, 6, 4, 3], [5, 6, 4, 3], [9, 6, 4, 3]], "7": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2], [1, 6, 5, 3], [6, 6, 3, 3], [9, 6, 4, 3]], "8": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2], [1, 6, 5, 3], [6, 6, 3, 3], [9, 6, 4, 3]], "9": [[1, 1, 4, 5], [5, 1, 8, 3], [5, 4, 4, 2], [9, 4, 4, 2], [9, 6, 4, 5], [1, 6, 3, 3], [4, 6, 5, 3], [1, 9, 4, 2], [5, 9, 4, 2]], "10": [[1, 1, 4, 5], [5, 1, 5, 3], [10, 1, 3, 3], [5, 4, 4, 2], [9, 4, 4, 2], [9, 6, 4, 5], [1, 6, 3, 3], [4, 6, 5, 3], [1, 9, 4, 2], [5, 9, 4, 2]]}, "mobile": {"1": [[1, 1, 4, 4]], "2": [[1, 1, 2, 4], [3, 1, 2, 4]], "3": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2]], "4": [[1, 1, 2, 3], [3, 1, 2, 2], [3, 3, 2, 3], [1, 4, 2, 2]], "5": [[1, 1, 4, 3], [1, 4, 2, 3], [3, 4, 2, 2], [3, 6, 2, 3], [1, 7, 2, 2]], "6": [[1, 1, 2, 4], [3, 1, 2, 2], [3, 3, 2, 2], [1, 5, 4, 3], [1, 8, 2, 2], [3, 8, 2, 2]], "7": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2]], "8": [[1, 1, 2, 3], [3, 1, 2, 2], [3, 3, 2, 3], [1, 4, 2, 2], [1, 6, 4, 3], [1, 9, 2, 4], [3, 9, 2, 2], [3, 11, 2, 2]], "9": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2], [1, 11, 2, 4], [3, 11, 2, 4]], "10": [[1, 1, 4, 3], [1, 4, 2, 2], [3, 4, 2, 2], [1, 6, 2, 3], [3, 6, 2, 2], [3, 8, 2, 3], [1, 9, 2, 2], [1, 11, 2, 4], [3, 11, 2, 2], [3, 13, 2, 2]]}, "mobilePerView": 5}</script>
   </section>
 
   
-  <section class="band" aria-label="Call to action">
+  <section class="band" aria-label="Kontaktujte nás">
     <div class="band__bg" data-parallax-bg>
       <img src="https://images.unsplash.com/photo-1558293842-c0fd3db86157?w=2000&q=80&auto=format&fit=crop" alt="" loading="lazy">
     </div>
     <div class="band__content container">
-      <p class="band__quote" data-split>“The best time to plant a tree was twenty years ago. The second best time is <em>now</em>.”</p>
-      <a href="#contact" class="btn btn--sun magnetic">Start your project <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <p class="band__quote" data-split>„Najlepší čas zasadiť strom bol pred dvadsiatimi rokmi. Druhý najlepší čas je <em>teraz</em>.“</p>
+      <a href="#contact" class="btn btn--sun magnetic">Začnime váš projekt <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
@@ -637,16 +650,16 @@ Autumn &amp; spring clear-ups</li>
     <div class="container">
       <div class="section-head section-head--split">
         <div>
-          <p class="eyebrow">Kind words</p>
-          <h2 class="section-title" data-split>Loved by <em>our clients</em>.</h2>
+          <p class="eyebrow">Milé slová</p>
+          <h2 class="section-title" data-split>Naši klienti <em>nás chvália</em>.</h2>
         </div>
         
         <div class="rating-card">
           
           <div>
-            <div class="rating-card__score"><strong>5.0</strong><span class="stars" role="img" aria-label="5.0 out of 5 stars"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+            <div class="rating-card__score"><strong>5,0</strong><span class="stars" role="img" aria-label="5,0 z 5 hviezdičiek"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
 </div>
-            <small>Average client rating</small>
+            <small>Priemerné hodnotenie klientov</small>
           </div>
           
         </div>
@@ -655,18 +668,18 @@ Autumn &amp; spring clear-ups</li>
     </div>
 
     
-    <div class="reviews__rail" data-rail tabindex="0" aria-label="Client reviews">
+    <div class="reviews__rail" data-rail tabindex="0" aria-label="Recenzie klientov">
       
       <article class="review-card">
         <div class="review-card__top">
-          <span class="stars" role="img" aria-label="5 out of 5 stars"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+          <span class="stars" role="img" aria-label="5 z 5 hviezdičiek"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
 
           
         </div>
         <div class="review-card__body">
-          <blockquote data-review-text>I&#x27;ve had a very positive experience with this gardening company. From the start they came across as professional and reliable, and it was clear they really know their work. I really appreciate their approach: they patiently explained everything, helped me choose the plants and told me what each plant needs, where to plant it and how to look after it. The finished garden looks great and exactly how I imagined it. Whether it&#x27;s garden design or regular maintenance, I definitely recommend R&amp;S Gardening.</blockquote>
+          <blockquote data-review-text>S touto záhradníckou spoločnosťou mám veľmi pozitívnu skúsenosť. Od začiatku pôsobili profesionálne a spoľahlivo. Bolo vidieť, že svojej práci naozaj rozumejú. Veľmi oceňujem ich prístup, všetko mi trpezlivo vysvetlili, poradili pri výbere rastlín a objasnili, čo ktorá rastlina potrebuje, kam ju zasadiť a ako sa o ňu starať. výsledná záhrada vyzerá skvelo a presne podľa mojich predstáv. Či už ide o návrh záhrady alebo jej pravidelnú údržbu, určite odporúčam R&amp;S Gardening.</blockquote>
           
-          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Show more <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Zobraziť viac <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
@@ -679,21 +692,21 @@ Autumn &amp; spring clear-ups</li>
           
           <div>
             <strong>David Bab</strong>
-            <small>Translated</small>
+            
           </div>
         </footer>
       </article>
       
       <article class="review-card">
         <div class="review-card__top">
-          <span class="stars" role="img" aria-label="5 out of 5 stars"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+          <span class="stars" role="img" aria-label="5 z 5 hviezdičiek"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
 
           
         </div>
         <div class="review-card__body">
-          <blockquote data-review-text>A very professional and personal approach. Keep it up! 👍👍</blockquote>
+          <blockquote data-review-text>Velmi profesionalny a ludsky pristup. Len tak dalej! 👍👍</blockquote>
           
-          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Show more <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Zobraziť viac <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
@@ -706,21 +719,21 @@ Autumn &amp; spring clear-ups</li>
           
           <div>
             <strong>Viktor Palus</strong>
-            <small>Translated</small>
+            
           </div>
         </footer>
       </article>
       
       <article class="review-card">
         <div class="review-card__top">
-          <span class="stars" role="img" aria-label="5 out of 5 stars"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
+          <span class="stars" role="img" aria-label="5 z 5 hviezdičiek"><span class="stars__fill" style="width: 100%">★★★★★</span>★★★★★</span>
 
           
         </div>
         <div class="review-card__body">
-          <blockquote data-review-text>A professional approach and expert work – I recommend them to everyone.</blockquote>
+          <blockquote data-review-text>Profesionálny prístup a odborná robota, odporúčam každému</blockquote>
           
-          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Show more <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="text-link review-card__more" data-review-more hidden>Zobraziť viac <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
@@ -733,7 +746,7 @@ Autumn &amp; spring clear-ups</li>
           
           <div>
             <strong>Sara Pútecová</strong>
-            <small>Translated</small>
+            
           </div>
         </footer>
       </article>
@@ -741,18 +754,18 @@ Autumn &amp; spring clear-ups</li>
     </div>
     <div class="container reviews__controls">
       
-      <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="reviews__all">See all reviews on Google <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <a href="https://share.google/GSgbt0rg0VPi0DLed" target="_blank" rel="noopener" class="reviews__all">Všetky recenzie na Google <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
 </a>
       
-      <button type="button" class="round-btn" data-rail-prev aria-label="Previous reviews"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <button type="button" class="round-btn" data-rail-prev aria-label="Predchádzajúce recenzie"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>
 
 </svg>
 </button>
-      <button type="button" class="round-btn" data-rail-next aria-label="Next reviews"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <button type="button" class="round-btn" data-rail-next aria-label="Ďalšie recenzie"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
@@ -765,26 +778,26 @@ Autumn &amp; spring clear-ups</li>
   <section class="contact section section--dark" id="contact">
     <div class="container contact__grid">
       <div class="contact__info">
-        <p class="eyebrow eyebrow--light">Get in touch</p>
-        <h2 class="section-title" data-split>Let's grow something <em>beautiful</em>.</h2>
-        <p class="contact__lead">Tell us a little about your garden and we'll get back to you within one working day with ideas and a free, no-obligation quote.</p>
+        <p class="eyebrow eyebrow--light">Ozvite sa nám</p>
+        <h2 class="section-title" data-split>Vypestujme spolu niečo <em>krásne</em>.</h2>
+        <p class="contact__lead">Napíšte nám pár slov o svojej záhrade a do jedného pracovného dňa sa vám ozveme s nápadmi a nezáväznou cenovou ponukou zdarma.</p>
         <ul class="contact__list">
           <li><span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
 
 </svg>
-</span><div><small>Call us</small><a href="tel:+421918761056">+421 918 761 056</a></div></li>
+</span><div><small>Zavolajte nám</small><a href="tel:+421918761056">+421 918 761 056</a></div></li>
           <li><span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 7l-10 6L2 7"/>
 
 </svg>
-</span><div><small>Email</small><a href="mailto:hello@rsgardening.example">hello@rsgardening.example</a></div></li>
+</span><div><small>E-mail</small><a href="mailto:info@rsgardening.com">info@rsgardening.com</a></div></li>
           
           <li><span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
 
 </svg>
-</span><div><small>Hours</small>Mon – Sat · 7:30 – 18:00</div></li>
+</span><div><small>Pracovný čas</small>Po – So · 7:30 – 18:00</div></li>
         </ul>
       </div>
 
@@ -795,13 +808,13 @@ Autumn &amp; spring clear-ups</li>
           <div class="form__row">
             <div class="field" data-field="name">
   <input type="text" name="name" placeholder=" " autocomplete="name" maxlength="100" required id="id_name">
-  <label for="id_name">Your name</label>
+  <label for="id_name">Vaše meno</label>
   <p class="field__error"></p>
 </div>
 
             <div class="field" data-field="email">
   <input type="email" name="email" placeholder=" " autocomplete="email" maxlength="254" required id="id_email">
-  <label for="id_email">Email address</label>
+  <label for="id_email">E-mailová adresa</label>
   <p class="field__error"></p>
 </div>
 
@@ -809,54 +822,54 @@ Autumn &amp; spring clear-ups</li>
           <div class="form__row">
             <div class="field" data-field="phone">
   <input type="text" name="phone" placeholder=" " autocomplete="tel" inputmode="tel" maxlength="30" id="id_phone">
-  <label for="id_phone">Phone (optional)</label>
+  <label for="id_phone">Telefón (nepovinné)</label>
   <p class="field__error"></p>
 </div>
 
             <div class="field field--select" data-field="service">
               <select name="service" id="id_service">
-  <option value="" selected>Not sure yet</option>
+  <option value="" selected>Ešte neviem</option>
 
-  <option value="Garden Design">Garden Design</option>
+  <option value="Návrh záhrad">Návrh záhrad</option>
 
-  <option value="Lawn Care">Lawn Care</option>
+  <option value="Starostlivosť o trávnik">Starostlivosť o trávnik</option>
 
-  <option value="Hedge &amp; Tree Work">Hedge &amp; Tree Work</option>
+  <option value="Živé ploty a stromy">Živé ploty a stromy</option>
 
-  <option value="Planting &amp; Borders">Planting &amp; Borders</option>
+  <option value="Výsadba a záhony">Výsadba a záhony</option>
 
-  <option value="Patios &amp; Paving">Patios &amp; Paving</option>
+  <option value="Altánky">Altánky</option>
 
-  <option value="Garden Maintenance">Garden Maintenance</option>
+  <option value="Údržba záhrad">Údržba záhrad</option>
 
 </select>
-              <label for="id_service">What can we help with?</label>
+              <label for="id_service">S čím vám môžeme pomôcť?</label>
               <p class="field__error"></p>
             </div>
           </div>
           <div class="field" data-field="message">
   <textarea name="message" cols="40" rows="5" placeholder=" " maxlength="3000" required id="id_message">
 </textarea>
-  <label for="id_message">Tell us about your garden</label>
+  <label for="id_message">Povedzte nám o svojej záhrade</label>
   <p class="field__error"></p>
 </div>
 
           <button type="submit" class="btn btn--sun btn--block magnetic" data-submit>
-            <span>Send message</span> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <span>Odoslať správu</span> <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
 
           </button>
-          <p class="form__note">We'll only use your details to reply to your enquiry.</p>
+          <p class="form__note">Vaše údaje použijeme iba na odpoveď na váš dopyt.</p>
         </form>
-        <div class="form-success" role="status" data-form-success data-default-message="Thanks! Your message is on its way – we'll be in touch within one working day.">
+        <div class="form-success" role="status" data-form-success data-default-message="Ďakujeme! Vaša správa je na ceste – ozveme sa vám do jedného pracovného dňa.">
           <div class="form-success__icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M20 6L9 17l-5-5"/>
 
 </svg>
 </div>
-          <h3>Message sent!</h3>
+          <h3>Správa odoslaná!</h3>
           <p data-success-text></p>
         </div>
         
@@ -869,13 +882,13 @@ Autumn &amp; spring clear-ups</li>
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a href="#top" class="nav__logo" aria-label="R&amp;S Gardening – home">
+        <a href="#top" class="nav__logo" aria-label="R&amp;S Gardening – domov">
           <span class="nav__logo-mark">
             <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50c0-20 14-32 36-34-1 20-13 34-35 34" fill="currentColor"/><path d="M14 50c7-12 16-19 26-25" stroke="var(--forest-900)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
           </span>
           <span class="nav__logo-text">RSGardening</span>
         </a>
-        <p>Garden design, landscaping and year-round care from a small, local team that treats every garden like its own.</p>
+        <p>Návrh, realizácia a celoročná starostlivosť o záhrady od malého miestneho tímu, ktorý sa o každú záhradu stará ako o vlastnú.</p>
         
         <div class="footer__social">
           <a href="https://www.instagram.com/rsgardening_?utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -892,27 +905,27 @@ Autumn &amp; spring clear-ups</li>
         
       </div>
 
-      <nav class="footer__col" aria-label="Footer">
-        <h3>Explore</h3>
-        <a href="#about">About us</a>
-        <a href="#services">Services</a>
-        <a href="#process">How we work</a>
-        <a href="work/">Our projects</a>
-        <a href="#reviews">Reviews</a>
+      <nav class="footer__col" aria-label="Päta stránky">
+        <h3>Preskúmajte</h3>
+        <a href="#about">O nás</a>
+        <a href="#services">Služby</a>
+        <a href="#process">Ako pracujeme</a>
+        <a href="work/">Naše projekty</a>
+        <a href="#reviews">Recenzie</a>
       </nav>
 
       <div class="footer__col">
-        <h3>Contact</h3>
+        <h3>Kontakt</h3>
         <a href="tel:+421918761056">+421 918 761 056</a>
-        <a href="mailto:hello@rsgardening.example">hello@rsgardening.example</a>
+        <a href="mailto:info@rsgardening.com">info@rsgardening.com</a>
         
-        <span>Mon – Sat · 7:30 – 18:00</span>
+        <span>Po – So · 7:30 – 18:00</span>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <p>© 2026 R&amp;S Gardening. All rights reserved.</p>
-      <a href="#top" class="footer__top-link">Back to top ↑</a>
+      <p>© 2026 R&amp;S Gardening. Všetky práva vyhradené.</p>
+      <a href="#top" class="footer__top-link">Späť hore ↑</a>
     </div>
   </div>
 
@@ -922,13 +935,13 @@ Autumn &amp; spring clear-ups</li>
   </div>
 </footer>
 
-<div class="lightbox" data-lightbox-root aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project gallery">
-  <button type="button" class="lightbox__close round-btn" data-lightbox-close aria-label="Close"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<div class="lightbox" data-lightbox-root aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galéria projektov">
+  <button type="button" class="lightbox__close round-btn" data-lightbox-close aria-label="Zavrieť"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M18 6L6 18"/><path d="M6 6l12 12"/>
 
 </svg>
 </button>
-  <button type="button" class="lightbox__nav lightbox__nav--prev round-btn" data-lightbox-prev aria-label="Previous image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <button type="button" class="lightbox__nav lightbox__nav--prev round-btn" data-lightbox-prev aria-label="Predchádzajúci obrázok"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>
 
 </svg>
@@ -937,7 +950,7 @@ Autumn &amp; spring clear-ups</li>
     <img src="" alt="" data-lightbox-img>
     <figcaption data-lightbox-caption></figcaption>
   </figure>
-  <button type="button" class="lightbox__nav lightbox__nav--next round-btn" data-lightbox-next aria-label="Next image"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <button type="button" class="lightbox__nav lightbox__nav--next round-btn" data-lightbox-next aria-label="Ďalší obrázok"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
 
 </svg>
@@ -945,6 +958,17 @@ Autumn &amp; spring clear-ups</li>
 </div>
 
 
+  
+<div class="lang-fab" data-lang-fab>
+  <button type="button" class="lang-fab__toggle" aria-expanded="false" aria-controls="lang-fab-options" aria-label="Zmeniť jazyk" title="Zmeniť jazyk">SK</button>
+  <div class="lang-fab__options" id="lang-fab-options">
+    <a href="en/" hreflang="en" lang="en">EN <span>English</span></a>
+  </div>
+</div>
+
+  <a href="#top" class="to-top" aria-label="Späť hore" title="Späť hore">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </a>
 
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
