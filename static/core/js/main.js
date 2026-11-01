@@ -576,7 +576,7 @@
     const visible = () => items.filter((i) => !i.classList.contains('is-hidden') && !(phone.matches && i.classList.contains('is-phone-hidden')));
     const show = (item) => {
       const source = $('img', item);
-      img.src = source.currentSrc || source.src;
+      img.src = source.dataset.full || source.currentSrc || source.src;
       img.alt = source.alt;
       caption.textContent = $('strong', item).textContent;
       current = visible().indexOf(item);
