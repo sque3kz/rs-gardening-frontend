@@ -42,7 +42,7 @@
 html,
 body { background: var(--forest-900); }
 html.near-bottom,
-html.near-bottom body { background: var(--forest-700); }
+html.near-bottom body { background: var(--forest-900); }
 html { -webkit-text-size-adjust: 100%; }
 main { display: block; background: var(--cream); }
 
@@ -506,21 +506,6 @@ html.needs-language .lang-picker {
 }
 .hero__inset img { width: 100%; height: 100%; object-fit: cover; }
 
-.hero__badge {
-  position: absolute; z-index: 2; display: flex; align-items: center; gap: 12px;
-  padding: 12px 18px 12px 12px; border-radius: 18px;
-  background: rgba(11, 31, 21, 0.55); border: 1px solid rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  font-size: 0.85rem; pointer-events: none;
-  animation: bob 6s ease-in-out infinite;
-}
-.hero__badge span:last-child { display: grid; line-height: 1.3; }
-.hero__badge small { color: rgba(246, 242, 233, 0.6); }
-.hero__badge-icon { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: rgba(166, 217, 143, 0.18); color: var(--leaf-300); }
-.hero__badge--a { left: 4%; top: 16%; }
-.hero__badge--b { right: 0; bottom: 14%; animation-delay: -3s; }
-.hero__badge--b .hero__badge-icon { background: rgba(242, 193, 78, 0.18); color: var(--sun); }
-@keyframes bob { 50% { transform: translateY(-12px); } }
 
 /* ==========================================================================
    Marquee
@@ -797,117 +782,104 @@ html.js .review-card blockquote { display: -webkit-box; -webkit-line-clamp: 4; -
 /* ==========================================================================
    Contact
    ========================================================================== */
-.contact { position: relative; overflow: hidden; }
+/* Whole section on a dark foliage photo (Unsplash, Wyxina Tresse) that fades into the footer's green at the bottom */
+.contact { position: relative; isolation: isolate; overflow: hidden; background: var(--forest-900); color: var(--cream); }
+.contact__bg {
+  position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%;
+}
 .contact::before {
-  content: ""; position: absolute; width: 700px; height: 700px; left: -250px; bottom: -350px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(63, 122, 79, 0.45), transparent 65%); pointer-events: none;
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(70% 60% at 50% 45%, rgba(11, 31, 21, 0) 0%, rgba(11, 31, 21, 0.35) 100%),
+    linear-gradient(180deg, rgba(11, 31, 21, 0.55) 0%, rgba(11, 31, 21, 0.25) 28%, rgba(11, 31, 21, 0.55) 68%, var(--forest-900) 100%);
 }
-.contact__grid { position: relative; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 90px); align-items: end; } /* form ends level with the contact details */
-.contact__lead { margin-top: 24px; color: rgba(246, 242, 233, 0.7); font-size: 1.1rem; max-width: 460px; }
-.contact__list { margin-top: 44px; display: grid; gap: 22px; }
-.contact__list li { display: flex; align-items: center; gap: 16px; }
-.contact__list li > span { width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; flex: none; background: rgba(166, 217, 143, 0.1); color: var(--leaf-300); }
-.contact__list li div { display: grid; line-height: 1.4; overflow-wrap: anywhere; }
-.contact__list small { color: rgba(246, 242, 233, 0.5); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
-.contact__list a:hover { color: var(--leaf-300); }
+/* no divider where the contact photo runs into the footer */
+main:has(> .contact:last-child) + .footer { border-top: 0; }
+main:has(> .contact:last-child) + .footer::before { top: auto; bottom: -320px; } /* its glow would be cut off at the seam */
 
+/* One card of dark frosted glass over the photo: intro on the left, contact tiles (e-mail, phone, hours) on the right */
 .contact__card {
-  position: relative; padding: clamp(28px, 4vw, 48px); border-radius: var(--radius-lg);
-  background: var(--cream); color: var(--ink);
-  box-shadow: 0 50px 100px -50px rgba(0, 0, 0, 0.6);
+  --lime: #b5d94c;          /* fresh-leaf accent */
+  --lime-deep: #4f7a1f;
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 5vw, 80px); align-items: center;
+  padding: clamp(40px, 5.5vw, 80px);
+  border-radius: var(--radius-lg);
+  background: rgba(7, 21, 14, 0.55); color: var(--cream);
+  -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.75), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
-.form { display: grid; gap: 18px; }
-.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.form__note { font-size: 0.82rem; color: var(--muted); text-align: center; }
+.contact__card::before { /* a soft lime glow behind the tiles */
+  content: ""; position: absolute; z-index: -1; width: 520px; height: 520px; right: -140px; top: -160px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(181, 217, 76, 0.16), transparent 65%); pointer-events: none;
+}
 
-.field { position: relative; }
-.field input,
-.field textarea,
-.field select {
-  width: 100%; padding: 26px 18px 10px; border-radius: 16px;
-  border: 1.5px solid var(--line); background: #fff; color: var(--ink);
-  font: inherit; font-size: 1rem; outline: none; resize: vertical;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  appearance: none; -webkit-appearance: none;
+.contact__intro .section-title em { color: var(--lime); }
+.contact__lead { margin-top: 22px; color: rgba(246, 242, 233, 0.78); font-size: 1.1rem; max-width: 470px; }
+.contact__ticks { margin-top: 32px; display: grid; gap: 12px; }
+.contact__ticks li { display: flex; align-items: center; gap: 12px; font-size: 0.98rem; color: rgba(246, 242, 233, 0.9); }
+.contact__tick {
+  width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: rgba(181, 217, 76, 0.18); color: var(--lime);
 }
-.field textarea { min-height: 150px; }
-/* Same fixed height and line height for one-line fields: iOS Safari ignores line-height on <select>,
-   so without this the dropdown is a different height and its text sits off from the other fields. */
-.field input,
-.field select { height: 64px; line-height: 1.5; }
-.field select {
-  cursor: pointer; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235d6b62' stroke-width='1.8'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 18px center; padding-right: 44px;
-}
-.field label {
-  position: absolute; left: 19px; top: 18px; color: var(--muted); pointer-events: none;
-  transform-origin: left top; transition: transform 0.25s var(--ease-out), color 0.25s;
-}
-.field input:focus,
-.field textarea:focus,
-.field select:focus { border-color: var(--moss-500); box-shadow: 0 0 0 4px rgba(63, 122, 79, 0.12); }
-.field input:focus + label,
-.field input:not(:placeholder-shown) + label,
-.field textarea:focus + label,
-.field textarea:not(:placeholder-shown) + label,
-.field--select label { transform: translateY(-10px) scale(0.78); color: var(--moss-500); font-weight: 600; }
-.field__error { font-size: 0.82rem; color: #b5432f; min-height: 0; margin-top: 4px; }
-.field__error:empty { display: none; }
-.field.has-error input,
-.field.has-error textarea,
-.field.has-error select,
-.field.has-error .select__button { border-color: #d06a55; }
+.contact__tick .icon { width: 14px; height: 14px; }
 
-/* Service dropdown drawn by main.js so its list opens right under the field (the hidden <select> is still submitted) */
-.field.is-enhanced select { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
-.select__button {
-  display: block; width: 100%; height: 64px; padding: 26px 44px 10px 18px; border-radius: 16px; text-align: left;
-  border: 1.5px solid var(--line); background: #fff; color: var(--ink); font-size: 1rem; line-height: 1.5;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235d6b62' stroke-width='1.8'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 18px center;
-  transition: border-color 0.3s, box-shadow 0.3s;
+/* Contact tiles: all three look the same – white, lime icon, dark text */
+.contact__actions { display: grid; gap: 14px; }
+.contact-tile {
+  position: relative; display: flex; align-items: center; gap: 18px;
+  padding: 20px 20px 20px 22px; border-radius: 22px;
+  background: #fff; color: var(--ink);
+  box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.35s;
 }
-.select__button:focus-visible,
-.field.is-open .select__button { outline: none; border-color: var(--moss-500); box-shadow: 0 0 0 4px rgba(63, 122, 79, 0.12); }
-.select__list {
-  position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; right: 0;
-  max-height: 290px; overflow-y: auto; overscroll-behavior: contain; padding: 6px; margin: 0; list-style: none;
-  background: #fff; border: 1.5px solid var(--line); border-radius: 16px;
-  box-shadow: 0 24px 50px -20px rgba(11, 31, 21, 0.45); outline: none;
+a.contact-tile:hover { box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(181, 217, 76, 0.6); }
+.contact-tile__icon {
+  width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; flex: none;
+  background: var(--lime); color: var(--forest-900);
 }
-.select__option { padding: 12px 14px; border-radius: 10px; color: var(--ink); cursor: pointer; line-height: 1.35; }
-.select__option.is-active { background: var(--cream-2); }
-.select__option[aria-selected="true"] { color: var(--moss-500); font-weight: 600; }
+.contact-tile__icon .icon { width: 25px; height: 25px; }
+.contact-tile__text { flex: 1; min-width: 0; display: grid; gap: 2px; line-height: 1.3; }
+.contact-tile__text small { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime-deep); }
+.contact-tile__text strong { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem, 1.6vw, 1.3rem); overflow-wrap: anywhere; }
+.contact-tile__hint { font-size: 0.85rem; color: var(--muted); }
+.contact-tile__go {
+  width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: var(--forest-800); color: var(--lime);
+  transition: background 0.35s, color 0.35s;
+}
+.contact-tile__go .icon { width: 18px; height: 18px; transition: transform 0.4s var(--ease-out); }
+a.contact-tile:hover .contact-tile__go { background: var(--lime); color: var(--forest-900); }
+a.contact-tile:hover .contact-tile__go .icon { transform: translateX(2px); }
 
-.btn[data-submit].is-loading { pointer-events: none; opacity: 0.75; }
-.btn[data-submit].is-loading .icon { animation: spin 0.9s linear infinite; }
-
-.form-success { display: none; text-align: center; padding: 40px 10px; }
-.form-success.is-visible { display: grid; justify-items: center; gap: 12px; }
-.form-success .icon { width: 30px; height: 30px; }
-.form-success__icon {
-  width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 8px;
-  background: var(--leaf-300); color: var(--forest-900);
-  animation: pop 0.7s var(--ease-out);
+/* Phones and tablets: one column */
+@media (max-width: 900px) {
+  .contact__card { grid-template-columns: 1fr; gap: 36px; padding: 40px 18px 18px; }
+  .contact__intro { padding-inline: 6px; }
 }
-.form-success h3 { font-family: var(--font-display); font-weight: 500; font-size: 2rem; }
-.form-success p { color: var(--muted); max-width: 380px; }
-@keyframes pop { 0% { transform: scale(0); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+/* Touch screens: live blur is expensive while scrolling, so use a more opaque card instead */
+@media (max-width: 900px), (pointer: coarse) {
+  .contact__card { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(7, 21, 14, 0.78); }
+}
+@media (max-width: 480px) {
+  .contact-tile { gap: 14px; padding: 16px 14px 16px 16px; border-radius: 20px; }
+  .contact-tile__icon { width: 48px; height: 48px; border-radius: 15px; }
+  .contact-tile__text strong { font-size: 1.06rem; }
+  .contact-tile__go { display: none; } /* the whole tile is the link; gives the e-mail address room, and all tiles stay alike */
+  .contact-tile--primary .contact-tile__text strong { white-space: nowrap; overflow-wrap: normal; }
+}
 
 /* ==========================================================================
    Footer
    ========================================================================== */
 .footer {
-  position: relative; background: var(--forest-700); color: var(--cream);
+  position: relative; background: var(--forest-900); color: var(--cream);
   border-top: 1px solid rgba(166, 217, 143, 0.18);
   padding-top: clamp(24px, 4vw, 50px); overflow: hidden;
 }
 .footer::before {
   content: ""; position: absolute; width: 640px; height: 640px; right: -220px; top: -260px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(125, 187, 106, 0.22), transparent 65%); pointer-events: none;
+  background: radial-gradient(circle, rgba(125, 187, 106, 0.13), transparent 65%); pointer-events: none;
 }
 .footer .container { position: relative; }
 
@@ -988,18 +960,9 @@ html.js:not(.reduced-motion) [data-reveal] { opacity: 0; transform: translateY(4
   .leaf--5, .leaf--6 { display: none; }
   .leaf--7 { left: auto; right: 70%; top: auto; bottom: 18%; }
   .leaf--8 { top: auto; bottom: 26%; }
-  .hero__badge { display: none; }
   .hero__trust { margin-top: 44px; max-width: none; }
   .about__grid { grid-template-columns: 1fr; }
   .page-hero { padding: 120px 0 56px; }
-  /* Stacked contact: intro text → form → contact details */
-  .contact__grid { display: flex; flex-direction: column; align-items: stretch; gap: 0; } /* undo the desktop bottom-alignment */
-  .contact__info { display: contents; }
-  .contact__info .eyebrow { order: 1; align-self: flex-start; }
-  .contact__info .section-title { order: 2; }
-  .contact__lead { order: 3; }
-  .contact__card { order: 4; margin-top: 36px; }
-  .contact__list { order: 5; margin-top: 44px; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .footer__brand { grid-column: 1 / -1; }
   .about__media { max-width: 560px; width: 100%; margin-inline: auto; }
@@ -1072,11 +1035,14 @@ html.js:not(.reduced-motion) [data-reveal] { opacity: 0; transform: translateY(4
   .services__row.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
   /* Endless self-moving rows (set up in main.js; without it the rows simply scroll) */
   .services__row.is-marquee { display: block; overflow: hidden; scroll-snap-type: none; padding-inline: 0; touch-action: pan-y; cursor: grab; }
-  .services__track { display: flex; gap: 12px; width: max-content; will-change: transform; }
+  .services__track { display: flex; gap: 12px; width: max-content; will-change: transform; backface-visibility: hidden; }
+  /* Moving cards are repainted cheaply: flat background, no hover glow (touch has no hover) */
+  .services__row .service-card__glow { display: none; }
   /* Wide, short cards: icon beside the title, highlights as small pills */
   .services__row .service-card {
     flex: 0 0 calc(100vw - 2 * var(--gutter) - 16px); scroll-snap-align: start; padding: 26px 22px 24px;
     transform-style: flat; transition: none; /* the 3D tilt is desktop-only; flat cards are cheaper to move */
+    background: rgba(255, 255, 255, 0.045);
     display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; align-content: start;
   }
   .services__row .service-card__icon { width: 46px; height: 46px; border-radius: 14px; margin: 0; }
@@ -1107,7 +1073,6 @@ html.js:not(.reduced-motion) [data-reveal] { opacity: 0; transform: translateY(4
   .stats { grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
   /* One word per line, so all three labels wrap the same way instead of just the longest one */
   .stat dt { width: min-content; line-height: 1.35; }
-  .form__row { grid-template-columns: 1fr; }
   .rating-card__link { border-left: 0; padding-left: 0; }
   .lightbox { grid-template-columns: 1fr; padding-inline: 16px; }
   .lightbox__nav { display: none; }

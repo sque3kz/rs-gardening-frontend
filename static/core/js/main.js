@@ -1,4 +1,4 @@
-/* R&S Gardening – interactions, scroll effects and the contact form. */
+/* R&S Gardening – interactions and scroll effects. */
 (() => {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -157,150 +157,6 @@
   }
 
   /* ------------------------------------------------------------------
-     Service dropdown: phones open the native <select> list wherever they
-     like (iPhones often show it off to the side), so it's replaced by a
-     button + list that opens right under the field. The real <select> stays
-     in the form, hidden, and is what gets submitted.
-  ------------------------------------------------------------------ */
-  $$('.field--select select').forEach((select) => {
-    const field = select.closest('.field');
-    const label = $('label', field);
-    const button = document.createElement('button');
-    const list = document.createElement('ul');
-    button.type = 'button';
-    button.className = 'select__button';
-    button.id = `${select.id}-button`;
-    button.setAttribute('aria-haspopup', 'listbox');
-    button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-controls', `${select.id}-list`);
-    list.className = 'select__list';
-    list.id = `${select.id}-list`;
-    list.setAttribute('role', 'listbox');
-    list.tabIndex = -1;
-    list.hidden = true;
-    if (label) {
-      label.id = label.id || `${select.id}-label`;
-      label.htmlFor = button.id;
-      list.setAttribute('aria-labelledby', label.id);
-    }
-    const options = [...select.options].map((option, index) => {
-      const item = document.createElement('li');
-      item.id = `${select.id}-option-${index}`;
-      item.className = 'select__option';
-      item.setAttribute('role', 'option');
-      item.textContent = option.textContent;
-      list.append(item);
-      return item;
-    });
-    select.tabIndex = -1;
-    select.setAttribute('aria-hidden', 'true');
-    field.classList.add('is-enhanced');
-    select.after(button, list);
-
-    let active = select.selectedIndex;
-    const highlight = (index) => {
-      active = Math.max(0, Math.min(options.length - 1, index));
-      options.forEach((item, i) => item.classList.toggle('is-active', i === active));
-      list.setAttribute('aria-activedescendant', options[active].id);
-      options[active].scrollIntoView({ block: 'nearest' });
-    };
-    const sync = () => {
-      button.textContent = select.options[select.selectedIndex]?.textContent || '';
-      options.forEach((item, i) => item.setAttribute('aria-selected', String(i === select.selectedIndex)));
-    };
-    const open = () => {
-      list.hidden = false;
-      field.classList.add('is-open');
-      button.setAttribute('aria-expanded', 'true');
-      highlight(select.selectedIndex);
-      list.focus({ preventScroll: true });
-    };
-    const close = (refocus = true) => {
-      if (list.hidden) return;
-      list.hidden = true;
-      field.classList.remove('is-open');
-      button.setAttribute('aria-expanded', 'false');
-      if (refocus) button.focus({ preventScroll: true });
-    };
-    const choose = (index) => {
-      select.selectedIndex = index;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-      sync();
-      close();
-    };
-
-    button.addEventListener('click', () => (list.hidden ? open() : close()));
-    button.addEventListener('keydown', (e) => {
-      if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) { e.preventDefault(); open(); }
-    });
-    list.addEventListener('click', (e) => {
-      const item = e.target.closest('.select__option');
-      if (item) choose(options.indexOf(item));
-    });
-    list.addEventListener('pointermove', (e) => {
-      const item = e.target.closest('.select__option');
-      if (item && e.pointerType === 'mouse') highlight(options.indexOf(item));
-    });
-    list.addEventListener('keydown', (e) => {
-      const keys = { ArrowDown: active + 1, ArrowUp: active - 1, Home: 0, End: options.length - 1 };
-      if (e.key in keys) { e.preventDefault(); highlight(keys[e.key]); }
-      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active); }
-      else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); }
-      else if (e.key === 'Tab') close(false);
-    });
-    document.addEventListener('pointerdown', (e) => { if (!field.contains(e.target)) close(false); });
-    select.addEventListener('change', sync);
-    sync();
-  });
-
-  /* ------------------------------------------------------------------
-     Contact form (works without JS too – this just upgrades it)
-  ------------------------------------------------------------------ */
-  const form = $('[data-contact-form]');
-  if (form) {
-    const submit = $('[data-submit]', form);
-    const success = $('[data-form-success]');
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      $$('.field', form).forEach((f) => { f.classList.remove('has-error'); $('.field__error', f).textContent = ''; });
-      submit.classList.add('is-loading');
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'X-Requested-With': 'fetch', Accept: 'application/json' },
-        });
-        const data = await response.json();
-        // Django returns {errors: {field: [{message}]}}; form services such as
-        // Formspree (used by the static GitHub Pages copy) return {errors: [{field, message}]}.
-        const errors = Array.isArray(data.errors)
-          ? Object.fromEntries(data.errors.map((e) => [e.field || '__all__', [e]]))
-          : (data.errors || {});
-        if (response.ok && data.ok !== false && !Object.keys(errors).length) {
-          $('[data-success-text]', success).textContent = data.message || success.dataset.defaultMessage;
-          form.style.display = 'none';
-          success.classList.add('is-visible');
-          return;
-        }
-        Object.entries(errors).forEach(([name, list]) => {
-          const field = $(`[data-field="${name}"]`, form);
-          if (field) {
-            field.classList.add('has-error');
-            $('.field__error', field).textContent = list[0].message;
-          } else {
-            $('.form__note', form).textContent = list[0].message;
-          }
-        });
-        $('.has-error input, .has-error textarea, .has-error .select__button', form)?.focus();
-      } catch (error) {
-        form.submit(); // fall back to a normal POST
-      } finally {
-        submit.classList.remove('is-loading');
-      }
-    });
-  }
-
-  /* ------------------------------------------------------------------
      Reviews rail: drag to scroll + arrow buttons
   ------------------------------------------------------------------ */
   // Touch scrolls these natively; this lets mouse users drag them sideways too.
@@ -343,69 +199,119 @@
 
   /* ------------------------------------------------------------------
      Services on phones: two endless rows drifting in opposite directions.
-     Each row's cards are repeated so the loop is seamless; the rows can
-     still be dragged (finger or mouse), keep gliding after a flick and then
-     ease back into the drift. They pause while held or hovered.
+     Each row's cards are repeated once so the loop is seamless. The steady
+     drift is a Web Animation of `transform`, which the browser runs on the
+     compositor, so it stays smooth while the page scrolls or the main thread
+     is busy. Dragging (finger or mouse) seeks that animation; a flick keeps
+     gliding, then the drift eases back in. Rows pause while held or hovered,
+     and while off screen.
   ------------------------------------------------------------------ */
   const phone = window.matchMedia('(max-width: 640px)');
   const serviceRows = $$('.services__row');
   const SPEED = 26; // px per second
   const FRICTION = 4; // how quickly a flick slows down (per second)
   let marquees = [];
-  let marqueeFrame = null;
   let marqueesOnScreen = false;
 
-  const wrap = (m) => {
-    // keep x within one set's width so the repeated cards line up seamlessly
-    if (!(m.set > 0)) return; // not laid out (e.g. mid-resize) – nothing to wrap
-    while (m.x <= -2 * m.set) m.x += m.set;
-    while (m.x > -m.set) m.x -= m.set;
-  };
-  const render = (m) => { m.track.style.transform = `translate3d(${m.x}px, 0, 0)`; };
-
   const teardownMarquees = () => {
-    cancelAnimationFrame(marqueeFrame);
-    marqueeFrame = null;
-    marquees.forEach(({ row, track, originals, cleanup }) => {
-      cleanup();
-      row.classList.remove('is-marquee');
-      originals.forEach((card) => row.append(card));
-      track.remove();
+    marquees.forEach((m) => {
+      m.cleanup();
+      m.row.classList.remove('is-marquee');
+      m.originals.forEach((card) => m.row.append(card));
+      m.track.remove();
     });
     marquees = [];
   };
 
   const setupMarquees = () => {
     teardownMarquees();
-    if (!phone.matches || reducedMotion) return;
+    if (!phone.matches || reducedMotion || !Element.prototype.animate) return;
     marquees = serviceRows.map((row, index) => {
       const originals = [...row.children];
       const track = document.createElement('div');
       track.className = 'services__track';
       originals.forEach((card) => track.append(card));
-      for (let copy = 0; copy < 2; copy++) {
-        originals.forEach((card) => {
-          const clone = card.cloneNode(true);
-          clone.setAttribute('aria-hidden', 'true');
-          clone.inert = true;
-          track.append(clone);
-        });
-      }
+      originals.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.inert = true;
+        track.append(clone);
+      });
       row.append(track);
       row.classList.add('is-marquee');
 
-      // velocity: px/s left over from a flick; speed: 0–1 share of the drift, eased back in after a drag
-      const m = { row, track, originals, x: 0, set: 0, dir: index % 2 === 0 ? -1 : 1, velocity: 0, speed: 1, hovering: false, drag: null, dirty: false };
-      m.measure = () => { m.set = track.children[originals.length].offsetLeft - track.children[0].offsetLeft; };
-      m.measure();
-      // Start the rows at different points so they never line up
-      m.x = -m.set - (index % 2 === 0 ? 0 : m.set * 0.42);
-      wrap(m);
-      render(m);
+      // dir -1 drifts left, +1 right. x is the track offset, kept within [-set, 0).
+      const m = { row, track, originals, dir: index % 2 === 0 ? -1 : 1, set: 0, anim: null, drag: null, hovering: false, frame: 0 };
+      const duration = () => (m.set / SPEED) * 1000;
+      const progress = () => {
+        const d = duration();
+        return (((m.anim.currentTime || 0) % d) + d) % d / d;
+      };
+      m.getX = () => (m.dir < 0 ? -progress() * m.set : -m.set + progress() * m.set);
+      m.setX = (x) => {
+        x = (((x % m.set) + m.set) % m.set) - m.set; // into [-set, 0)
+        m.anim.currentTime = (m.dir < 0 ? -x / m.set : (x + m.set) / m.set) * duration();
+      };
+      // Runs only on screen and when nobody is holding, hovering or flicking it
+      m.sync = () => {
+        if (!m.anim || m.frame) return;
+        if (marqueesOnScreen && !m.drag && !m.hovering) m.anim.play();
+        else m.anim.pause();
+      };
 
+      // (Re)build the loop for the current card widths, keeping the row where it was
+      m.build = (startProgress) => {
+        const p = m.anim ? progress() : startProgress;
+        m.anim?.cancel();
+        m.anim = null;
+        m.set = track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
+        if (!(m.set > 0)) return;
+        const [from, to] = m.dir < 0 ? [0, -m.set] : [-m.set, 0];
+        m.anim = track.animate(
+          [{ transform: `translate3d(${from}px, 0, 0)` }, { transform: `translate3d(${to}px, 0, 0)` }],
+          { duration: duration(), iterations: Infinity, easing: 'linear' },
+        );
+        m.anim.currentTime = p * duration();
+        m.sync();
+      };
+      m.build(index % 2 === 0 ? 0 : 0.42); // start the rows at different points so they never line up
+
+      // After a drag: glide with the flick's speed, then ease the drift back in
+      const settle = (velocity) => {
+        cancelAnimationFrame(m.frame);
+        if (!m.anim) return;
+        let last = performance.now();
+        let ramp = -1; // < 0 while gliding; then 0 → 1 as the drift comes back
+        m.anim.pause();
+        const step = (now) => {
+          const dt = Math.min(0.05, (now - last) / 1000);
+          last = now;
+          if (ramp < 0) {
+            m.setX(m.getX() + velocity * dt);
+            velocity *= Math.exp(-FRICTION * dt);
+            if (Math.abs(velocity) < 8) {
+              ramp = 0;
+              m.anim.updatePlaybackRate(0.001);
+              m.anim.play();
+            }
+          } else {
+            ramp = Math.min(1, ramp + dt / 0.8);
+            m.anim.updatePlaybackRate(Math.max(0.001, ramp));
+            if (ramp >= 1) { m.frame = 0; m.sync(); return; }
+          }
+          m.frame = requestAnimationFrame(step);
+        };
+        m.frame = requestAnimationFrame(step);
+      };
+
+      let pending = null; // latest drag position, applied once per frame
       const down = (e) => {
-        m.drag = { startX: e.clientX, startY: e.clientY, startPos: m.x, active: false, lastX: e.clientX, lastT: e.timeStamp };
-        m.velocity = 0;
+        if (!m.anim) return;
+        cancelAnimationFrame(m.frame);
+        m.frame = 0;
+        m.anim.updatePlaybackRate(1);
+        m.drag = { startX: e.clientX, startY: e.clientY, startPos: m.getX(), active: false, lastX: e.clientX, lastT: e.timeStamp, velocity: 0 };
+        m.sync();
       };
       const move = (e) => {
         if (!m.drag) return;
@@ -417,75 +323,59 @@
         if (!m.drag.active) return;
         // Smoothed finger speed, used for the glide after letting go
         const dt = e.timeStamp - m.drag.lastT;
-        if (dt > 0) m.velocity = 0.8 * ((e.clientX - m.drag.lastX) / dt) * 1000 + 0.2 * m.velocity;
+        if (dt > 0) m.drag.velocity = 0.8 * ((e.clientX - m.drag.lastX) / dt) * 1000 + 0.2 * m.drag.velocity;
         m.drag.lastX = e.clientX;
         m.drag.lastT = e.timeStamp;
-        m.x = m.drag.startPos + dx;
-        wrap(m);
-        m.dirty = true; // drawn on the next frame, so fast pointer events don't each restyle the track
+        if (pending === null) {
+          requestAnimationFrame(() => {
+            if (pending !== null && m.anim) m.setX(pending);
+            pending = null;
+          });
+        }
+        pending = m.drag.startPos + dx;
       };
       const up = (e) => {
         if (!m.drag) return;
-        // A drag that stopped before release (or never started) shouldn't glide
-        if (!m.drag.active || e.timeStamp - m.drag.lastT > 80) m.velocity = 0;
+        const { active, lastT, velocity } = m.drag;
         m.drag = null;
-        m.speed = 0; // the drift eases back in once the glide has slowed down
         row.classList.remove('is-dragging');
+        // A drag that stopped before release (or never started) shouldn't glide
+        settle(!active || e.timeStamp - lastT > 80 ? 0 : velocity);
       };
-      const enter = (e) => { if (e.pointerType === 'mouse') m.hovering = true; };
-      const leave = () => { m.hovering = false; };
+      const enter = (e) => { if (e.pointerType === 'mouse') { m.hovering = true; m.sync(); } };
+      const leave = () => { m.hovering = false; m.sync(); };
       row.addEventListener('pointerdown', down);
-      window.addEventListener('pointermove', move);
+      window.addEventListener('pointermove', move, { passive: true });
       window.addEventListener('pointerup', up);
       window.addEventListener('pointercancel', up);
       row.addEventListener('pointerenter', enter);
       row.addEventListener('pointerleave', leave);
       m.cleanup = () => {
+        cancelAnimationFrame(m.frame);
+        m.anim?.cancel();
         row.removeEventListener('pointerdown', down);
         window.removeEventListener('pointermove', move);
         window.removeEventListener('pointerup', up);
         window.removeEventListener('pointercancel', up);
         row.removeEventListener('pointerenter', enter);
         row.removeEventListener('pointerleave', leave);
-        track.style.transform = '';
       };
       return m;
     });
-    let last = performance.now();
-    const tick = (now) => {
-      const dt = Math.min(0.05, (now - last) / 1000);
-      last = now;
-      if (marqueesOnScreen) {
-        marquees.forEach((m) => {
-          if (m.drag || m.hovering) {
-            if (m.dirty) { m.dirty = false; render(m); }
-            return;
-          }
-          if (Math.abs(m.velocity) > 8) {
-            m.x += m.velocity * dt;
-            m.velocity *= Math.exp(-FRICTION * dt);
-          } else {
-            m.velocity = 0;
-            m.speed = Math.min(1, m.speed + dt / 0.8);
-            m.x += m.dir * SPEED * m.speed * dt;
-          }
-          wrap(m);
-          render(m);
-        });
-      }
-      marqueeFrame = requestAnimationFrame(tick);
-    };
-    marqueeFrame = requestAnimationFrame(tick);
   };
 
   if (serviceRows.length) {
-    new IntersectionObserver(([entry]) => { marqueesOnScreen = entry.isIntersecting; })
-      .observe($('.services__grid'));
+    new IntersectionObserver(([entry]) => {
+      marqueesOnScreen = entry.isIntersecting;
+      marquees.forEach((m) => m.sync()); // nothing animates while scrolled away
+    }).observe($('.services__grid'));
     setupMarquees();
     phone.addEventListener('change', setupMarquees);
+    let resizeTimer;
     window.addEventListener('resize', () => {
       if (!phone.matches) return; // leaving phone size: the media query listener tears them down
-      marquees.forEach((m) => { m.measure(); wrap(m); render(m); });
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => marquees.forEach((m) => m.build(0)), 150);
     });
   }
 
@@ -697,7 +587,7 @@
   /* ---------- Hero intro (runs after the preloader) ---------- */
   const hero = $('.hero');
   const heroWords = hero && !lightMotion ? splitWords($('.hero__title')) : [];
-  const heroBits = $$('.hero__eyebrow, .hero__lead, .hero__cta, .hero__trust, .hero__badge');
+  const heroBits = $$('.hero__eyebrow, .hero__lead, .hero__cta, .hero__trust');
   const heroLeaves = $$('.hero .leaf');
   if (hero && !reducedMotion) {
     if (lightMotion) gsap.set('.hero__title', { opacity: 0, y: 40 });
@@ -809,7 +699,7 @@
   // card is scrolled or drifts into view from the side.
   fadeUp($$('.services__row.is-marquee').length ? '.services__row' : '.service-card');
   fadeUp('.reviews__rail');
-  fadeUp('.contact__list li, .contact__card');
+  fadeUp('.contact__ticks li, .contact-tile');
   // On phones the step cards sit in a sideways row inside the sticky panel – no reveal there
   if (!lightMotion) fadeUp('.process__step');
   fadeUp('.band .btn');

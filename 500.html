@@ -1,0 +1,155 @@
+<!doctype html>
+<!-- Error page: the text for every language is in #error-copy at the bottom; static/core/js/error.js picks one. Links resolve against the <base> set in <head>. -->
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // Error pages are served for any missing URL, so relative links can't be relative to the
+    // current address. Point them at the site root instead: "/" on a custom domain, or
+    // "/<repo>/" on a GitHub Pages project address (username.github.io/<repo>/).
+    (function () {
+      var root = '/', m = location.pathname.match(/^\/[^/]+\//);
+      if (/\.github\.io$/.test(location.hostname) && m) root = m[0];
+      var base = document.createElement('base');
+      base.href = root;
+      document.head.appendChild(base);
+    })();
+  </script>
+  <meta name="robots" content="noindex">
+  <title>Chyba servera · R&amp;S Gardening</title>
+  <meta name="theme-color" content="#0e2419">
+  <link rel="icon" href="static/core/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/core/css/main.css">
+  <link rel="stylesheet" href="static/core/css/error.css">
+  <script>
+    document.documentElement.classList.add('js');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced-motion');
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-t="skip">Preskočiť na obsah</a>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="./" data-href="" class="nav__logo" aria-label="R&amp;S Gardening – domov" data-t-label="home_label">
+      <span class="nav__logo-mark">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50c0-20 14-32 36-34-1 20-13 34-35 34" fill="currentColor"/><path d="M14 50c7-12 16-19 26-25" stroke="var(--forest-900)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      <span class="nav__logo-text">RSGardening</span>
+    </a>
+    <div class="nav__actions">
+      <a class="nav__phone" href="tel:+421918761056"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>+421 918 761 056</span></a>
+      <a href="./#contact" data-href="#contact" class="btn btn--sun btn--sm" data-t="quote">Cenová ponuka</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero err">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__glow hero__glow--a"></div>
+      <div class="hero__glow hero__glow--b"></div>
+      <div class="hero__grain"></div>
+    </div>
+
+    <svg width="0" height="0" class="sr-only" aria-hidden="true">
+      <symbol id="leaf-round" viewBox="0 0 100 100"><path d="M10 90C10 40 40 10 90 10 90 60 60 90 10 90z"/><path d="M10 90L70 30" class="vein"/></symbol>
+      <symbol id="leaf-long" viewBox="0 0 100 100"><path d="M50 4C70 26 74 62 50 96 26 62 30 26 50 4z"/><path d="M50 96V18" class="vein"/></symbol>
+    </svg>
+
+    <div class="hero__leaves" aria-hidden="true">
+      <div class="leaf leaf--1" data-depth="18"><svg><use href="#leaf-round"/></svg></div>
+      <div class="leaf leaf--2" data-depth="34"><svg><use href="#leaf-long"/></svg></div>
+      <div class="leaf leaf--3" data-depth="12"><svg><use href="#leaf-round"/></svg></div>
+      <div class="leaf leaf--4" data-depth="26"><svg><use href="#leaf-long"/></svg></div>
+      <div class="leaf leaf--5" data-depth="44"><svg><use href="#leaf-round"/></svg></div>
+      <div class="leaf leaf--6" data-depth="20"><svg><use href="#leaf-long"/></svg></div>
+    </div>
+    <div class="err-fall" data-fall aria-hidden="true"></div>
+    <div class="hero__leaves hero__leaves--front" aria-hidden="true">
+      <div class="leaf leaf--7" data-depth="60"><svg><use href="#leaf-long"/></svg></div>
+      <div class="leaf leaf--8" data-depth="50"><svg><use href="#leaf-round"/></svg></div>
+    </div>
+
+    <div class="hero__inner container">
+      <div class="err__content">
+        <p class="eyebrow eyebrow--light hero__eyebrow err__fade" style="--d:0"><span class="dot"></span> <span data-t="eyebrow">Chyba 500 · Problém na serveri</span></p>
+        <div class="err-code" role="img" aria-label="500">
+          <span class="err-digit" aria-hidden="true">5</span>
+          <svg class="err-zero" viewBox="0 0 132 168" aria-hidden="true">
+            <path class="err-zero__ring err-zero__ring--ghost" d="M66 16A50 68 0 0 1 66 152A50 68 0 0 1 66 16"/>
+            <path class="err-zero__ring" pathLength="1" d="M66 16A50 68 0 0 1 66 152A50 68 0 0 1 66 16"/>
+            <g transform="translate(98 32)"><g class="err-zero__sprout" style="--i:0"><use href="#leaf-round" x="-3.4" y="-30.6" width="34" height="34"/></g></g>
+            <g transform="translate(19 61) rotate(-135)"><g class="err-zero__sprout" style="--i:1"><use href="#leaf-round" x="-2.8" y="-25.2" width="28" height="28"/></g></g>
+            <g transform="translate(109 118) rotate(75)"><g class="err-zero__sprout err-zero__sprout--sun" style="--i:2"><use href="#leaf-round" x="-2.4" y="-21.6" width="24" height="24"/></g></g>
+          </svg>
+          <svg class="err-zero" viewBox="0 0 132 168" aria-hidden="true">
+            <path class="err-zero__ring err-zero__ring--ghost" d="M66 16A50 68 0 0 1 66 152A50 68 0 0 1 66 16"/>
+            <path class="err-zero__ring" pathLength="1" d="M66 16A50 68 0 0 1 66 152A50 68 0 0 1 66 16"/>
+            <g transform="translate(98 32)"><g class="err-zero__sprout" style="--i:0"><use href="#leaf-round" x="-3.4" y="-30.6" width="34" height="34"/></g></g>
+            <g transform="translate(19 61) rotate(-135)"><g class="err-zero__sprout" style="--i:1"><use href="#leaf-round" x="-2.8" y="-25.2" width="28" height="28"/></g></g>
+            <g transform="translate(109 118) rotate(75)"><g class="err-zero__sprout err-zero__sprout--sun" style="--i:2"><use href="#leaf-round" x="-2.4" y="-21.6" width="24" height="24"/></g></g>
+          </svg>
+        </div>
+        <h1 class="err__title err__fade" style="--d:3" data-t="heading">Niečo sa nám <em>zamotalo</em>.</h1>
+        <p class="err__lead err__fade" style="--d:4" data-t="lead">Upratujeme to ako záhradu po búrke. Skúste to prosím o chvíľu znova – alebo nám rovno zavolajte.</p>
+        <div class="hero__cta err__fade" style="--d:5">
+          <a href="" class="btn btn--sun magnetic" data-reload data-t="primary_html">Skúsiť znova</a>
+          <a href="./" data-href="" class="btn btn--ghost" data-t="secondary">Späť na úvod</a>
+        </div>
+        <p class="err__help err__fade" style="--d:6" data-t="help">Potrebujete pomoc? Zavolajte nám na <a href="tel:+421918761056">+421 918 761 056</a> alebo napíšte na <a href="mailto:rsgardening@outlook.sk">rsgardening@outlook.sk</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="application/json" id="error-copy">
+{
+  "sk": {
+    "skip": "Preskočiť na obsah",
+    "home_label": "R&S Gardening – domov",
+    "quote": "Cenová ponuka",
+    "help": "Potrebujete pomoc? Zavolajte nám na <a href=\"tel:+421918761056\">+421 918 761 056<\/a> alebo napíšte na <a href=\"mailto:rsgardening@outlook.sk\">rsgardening@outlook.sk<\/a>.",
+    "title": "Chyba servera · R&S Gardening",
+    "eyebrow": "Chyba 500 · Problém na serveri",
+    "heading": "Niečo sa nám <em>zamotalo<\/em>.",
+    "lead": "Upratujeme to ako záhradu po búrke. Skúste to prosím o chvíľu znova – alebo nám rovno zavolajte.",
+    "primary": "Skúsiť znova",
+    "secondary": "Späť na úvod",
+    "primary_html": "Skúsiť znova"
+  },
+  "en": {
+    "skip": "Skip to content",
+    "home_label": "R&S Gardening – home",
+    "quote": "Free quote",
+    "help": "Need a hand? Call us on <a href=\"tel:+421918761056\">+421 918 761 056<\/a> or email <a href=\"mailto:rsgardening@outlook.sk\">rsgardening@outlook.sk<\/a>.",
+    "title": "Server error · R&S Gardening",
+    "eyebrow": "Error 500 · Server problem",
+    "heading": "Something got <em>tangled<\/em>.",
+    "lead": "We’re tidying up like it’s a garden after a storm. Please try again in a moment – or just give us a call.",
+    "primary": "Try again",
+    "secondary": "Back home",
+    "primary_html": "Try again"
+  },
+  "de": {
+    "skip": "Zum Inhalt springen",
+    "home_label": "R&S Gardening – Startseite",
+    "quote": "Angebot",
+    "help": "Brauchen Sie Hilfe? Rufen Sie uns an unter <a href=\"tel:+421918761056\">+421 918 761 056<\/a> oder schreiben Sie an <a href=\"mailto:rsgardening@outlook.sk\">rsgardening@outlook.sk<\/a>.",
+    "title": "Serverfehler · R&S Gardening",
+    "eyebrow": "Fehler 500 · Serverproblem",
+    "heading": "Hier hat sich etwas <em>verheddert<\/em>.",
+    "lead": "Wir räumen gerade auf wie im Garten nach einem Sturm. Bitte versuchen Sie es gleich noch einmal – oder rufen Sie uns einfach an.",
+    "primary": "Erneut versuchen",
+    "secondary": "Zur Startseite",
+    "primary_html": "Erneut versuchen"
+  }
+}
+</script>
+<script src="static/core/js/error.js"></script>
+</body>
+</html>

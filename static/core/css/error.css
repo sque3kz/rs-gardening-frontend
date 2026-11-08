@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Error pages (404.html, 500.html) – builds on main.css (tokens, nav, buttons,
+   hero background and floating leaves).
+   ========================================================================== */
+
+.err {
+  min-height: 100svh;
+  padding: 120px 0 64px;
+  text-align: center;
+}
+.err .hero__inner { display: flex; flex-direction: column; align-items: center; }
+.err__content { display: flex; flex-direction: column; align-items: center; max-width: 720px; }
+
+.err .hero__eyebrow { margin-bottom: 8px; }
+
+/* ---------- Big status code: digits with a vine-ring for every zero ---------- */
+.err-code {
+  display: flex; align-items: center; justify-content: center; gap: 0.02em;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(7.5rem, 26vw, 15rem); line-height: 1; letter-spacing: -0.04em;
+  color: var(--cream);
+  user-select: none;
+}
+.err-digit {
+  display: inline-block;
+  background: linear-gradient(180deg, var(--cream) 30%, rgba(166, 217, 143, 0.75));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: err-rise 1.1s var(--ease-out) both;
+}
+.err-code > :nth-child(1) { animation-delay: 0.1s; }
+.err-code > :nth-child(2) { animation-delay: 0.22s; }
+.err-code > :nth-child(3) { animation-delay: 0.34s; }
+@keyframes err-rise { from { opacity: 0; transform: translateY(0.35em) rotate(-4deg); } }
+
+.err-zero {
+  display: inline-block; width: 0.66em; height: 0.84em; margin-inline: 0.03em;
+  overflow: visible;
+  animation: err-rise 1.1s var(--ease-out) both, err-bob 6s ease-in-out 1.4s infinite;
+}
+.err-code > .err-zero:nth-child(3) { animation-delay: 0.34s, 2.2s; }
+@keyframes err-bob { 50% { translate: 0 -0.04em; rotate: 2deg; } }
+
+.err-zero__ring {
+  fill: none; stroke: var(--leaf-300); stroke-width: 20; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: err-draw 1.6s var(--ease-out) 0.45s forwards;
+}
+.err-zero__ring--ghost { stroke: rgba(166, 217, 143, 0.12); stroke-dashoffset: 0; animation: none; }
+@keyframes err-draw { to { stroke-dashoffset: 0; } }
+
+/* Leaves sprouting from the ring: the outer <g> places them, the inner one grows and sways */
+.err-zero__sprout {
+  transform-box: fill-box; transform-origin: 0% 100%;
+  fill: var(--leaf-400); stroke: var(--leaf-300); stroke-width: 2;
+  animation: err-sprout 0.9s var(--ease-out) both, err-sway 4s ease-in-out infinite;
+  animation-delay: calc(1.2s + var(--i, 0) * 0.18s), calc(2.1s + var(--i, 0) * 0.5s);
+}
+.err-zero__sprout--sun { fill: var(--sun); stroke: var(--sun-600); }
+@keyframes err-sprout { from { scale: 0; rotate: -40deg; } }
+@keyframes err-sway { 50% { rotate: 9deg; } }
+
+/* ---------- Copy ---------- */
+.err__title {
+  margin-top: 18px;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.03em;
+}
+.err__title em { font-family: var(--font-accent); font-weight: 400; font-style: normal; color: var(--leaf-300); }
+.err__lead { margin: 20px auto 0; max-width: 540px; font-size: 1.1rem; color: rgba(246, 242, 233, 0.72); }
+.err .hero__cta { justify-content: center; margin-top: 36px; }
+.err__help { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line-light); font-size: 0.92rem; color: rgba(246, 242, 233, 0.6); }
+.err__help a { color: var(--leaf-300); font-weight: 600; white-space: nowrap; border-bottom: 1px solid rgba(166, 217, 143, 0.35); transition: border-color 0.3s; }
+.err__help a:hover { border-color: var(--leaf-300); }
+
+.err__fade { animation: err-fade 1s var(--ease-out) both; animation-delay: calc(0.5s + var(--d, 0) * 0.12s); }
+@keyframes err-fade { from { opacity: 0; transform: translateY(22px); } }
+
+/* ---------- Leaf positions for a centred layout (the home hero places them around a photo) ---------- */
+.err .leaf--2 { left: 18%; bottom: 12%; }
+.err .leaf--5 { left: 24%; top: 22%; }
+.err .leaf--7 { left: auto; right: 14%; top: auto; bottom: 16%; }
+.err .leaf--8 { right: 6%; top: 30%; }
+
+/* ---------- Falling leaves (spawned by error.js) ---------- */
+.err-fall { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+.fall-leaf {
+  position: absolute; top: -80px; left: var(--x);
+  width: var(--s); height: var(--s);
+  animation: fall var(--t) linear var(--delay) infinite;
+}
+.fall-leaf svg {
+  display: block; width: 100%; height: 100%; overflow: visible;
+  fill: var(--c); stroke: var(--c-line); stroke-width: 1.5;
+  animation: fall-sway calc(var(--t) / 4) ease-in-out var(--delay) infinite alternate;
+}
+@keyframes fall {
+  from { transform: translateY(0); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: 1; }
+  to { transform: translateY(calc(100svh + 160px)); opacity: 0; }
+}
+@keyframes fall-sway {
+  from { transform: translateX(calc(var(--swing) * -1)) rotate(calc(var(--r) - 35deg)); }
+  to { transform: translateX(var(--swing)) rotate(calc(var(--r) + 35deg)); }
+}
+
+/* A click anywhere sends a small gust of leaves from the pointer */
+.gust-leaf {
+  position: fixed; z-index: 4; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  pointer-events: none;
+  animation: gust 1.4s var(--ease-out) forwards;
+}
+.gust-leaf svg { display: block; width: 100%; height: 100%; fill: var(--c); stroke: var(--c-line); stroke-width: 1.5; }
+@keyframes gust {
+  from { transform: translate(0, 0) rotate(0) scale(0.4); opacity: 1; }
+  70% { opacity: 1; }
+  to { transform: translate(var(--gx), var(--gy)) rotate(var(--gr)) scale(1); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .err { padding-top: 110px; }
+  /* main.css reorders the home hero's children on small screens; keep the source order here */
+  .err .hero__eyebrow, .err .hero__cta { order: 0; align-self: auto; }
+  .err .leaf--1 { width: 150px; height: 150px; }
+  .err .leaf--3 { width: 200px; height: 200px; }
+  .err .leaf--7, .err .leaf--8 { display: none; }
+}
+@media (max-width: 480px) {
+  .err .hero__cta { flex-direction: column; align-self: stretch; }
+}
+
+/* Reduced motion: everything in its final state, no falling leaves */
+html.reduced-motion .err-fall,
+html.reduced-motion .gust-leaf { display: none; }
+html.reduced-motion .err-zero__ring { stroke-dashoffset: 0; }
+html.reduced-motion .err__fade,
+html.reduced-motion .err-digit,
+html.reduced-motion .err-zero,
+html.reduced-motion .err-zero__ring,
+html.reduced-motion .err-zero__sprout { animation: none; }
