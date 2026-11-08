@@ -316,21 +316,20 @@ html.needs-language .lang-picker {
 }
 .lang-picker__option.is-suggested .lang-picker__code { background: rgba(28, 23, 18, 0.12); }
 
-/* Leaves: two on each side behind the card. --r is each leaf's resting angle; they pop in after the card, then sway */
-.lang-picker__leaves { position: absolute; inset: 0; pointer-events: none; }
+/* Leaves: two big ones resting on the card's corners (top left, bottom right), in front of it.
+   --r is each leaf's resting angle; they pop in after the card, then sway */
+.lang-picker__leaves { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .lang-picker__leaf {
   --r: 0deg; position: absolute; overflow: visible;
   fill: var(--leaf, #4e9a48); stroke: rgba(11, 31, 21, 0.35); stroke-width: 1.2;
-  transform: rotate(var(--r)); filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.35));
+  transform: rotate(var(--r)); filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.4));
   animation: lang-leaf-in 0.9s var(--ease-out) both, lang-leaf-sway 7s ease-in-out infinite;
 }
 .lang-picker__vein { fill: none; stroke: rgba(11, 31, 21, 0.4); stroke-width: 2.2; stroke-linecap: round; }
-.lang-picker__leaf--1 { --r: -38deg; --leaf: #3d8442; width: 118px; height: 118px; left: -70px; top: 6%; animation-delay: 0.25s, 0s; }
-.lang-picker__leaf--2 { --r: 200deg; --leaf: #6cb35a; width: 84px; height: 84px; left: -58px; top: 54%; animation-delay: 0.35s, -2s; animation-duration: 0.9s, 8s; }
-.lang-picker__leaf--3 { --r: 12deg; --leaf: #4e9a48; width: 90px; height: 90px; right: -60px; top: 12%; animation-delay: 0.3s, -1s; animation-duration: 0.9s, 7.5s; }
-.lang-picker__leaf--4 { --r: 32deg; --leaf: #3d8442; width: 124px; height: 124px; right: -76px; top: 46%; animation-delay: 0.4s, -3s; animation-duration: 0.9s, 9s; }
+.lang-picker__leaf--1 { --r: -52deg; --leaf: #3d8442; width: 128px; height: 128px; left: -50px; top: -58px; animation-delay: 0.3s, 0s; }
+.lang-picker__leaf--3 { --r: 6deg; --leaf: #5ea64f; width: 112px; height: 112px; right: -52px; bottom: -54px; animation-delay: 0.45s, -2.5s; animation-duration: 0.9s, 8s; }
 @media (max-width: 480px) {
-  .lang-picker__leaf { scale: 0.78; }
+  .lang-picker__leaf { scale: 0.85; }
 }
 @keyframes lang-picker-fade { from { opacity: 0; } }
 @keyframes lang-picker-rise { from { opacity: 0; transform: translateY(24px) scale(0.97); } }
