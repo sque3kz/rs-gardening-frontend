@@ -2,11 +2,11 @@ import * as THREE from 'three';
 
 const materialCache = new Map();
 
-/** Flat-shaded "low poly" material, cached per colour. */
+/** Smooth-shaded matte material, cached per colour. */
 export function mat(color, extra = {}) {
   const key = `${color}:${JSON.stringify(extra)}`;
   if (!materialCache.has(key)) {
-    materialCache.set(key, new THREE.MeshStandardMaterial({ color, flatShading: true, roughness: 0.85, metalness: 0, ...extra }));
+    materialCache.set(key, new THREE.MeshStandardMaterial({ color, roughness: 0.85, metalness: 0, ...extra }));
   }
   return materialCache.get(key);
 }

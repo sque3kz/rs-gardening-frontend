@@ -1,13 +1,12 @@
 /* Process section: a tree grows out of a terracotta pot as you scroll. */
 import * as THREE from 'three';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { mergeGeometries, mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 import { createRenderer, easeOutBack, jitter, lowPower, mat, mesh, reducedMotion, runWhenVisible, seededRandom, smoothstep, webglAvailable } from './three-utils.js';
 
 const canvas = document.querySelector('[data-grow-canvas]');
 
 const C = {
   pot: 0xc9704a,
-  potDark: 0xa95a3a,
   soil: 0x4a3222,
   bark: 0x7a5434,
   leaves: [0x4e9a48, 0x6cb35a, 0x3d8442, 0x86c46a],
@@ -17,6 +16,7 @@ const MAX_DEPTH = 3;
 
 function init() {
   const rand = seededRandom(21);
+  const surfaceRand = seededRandom(7); // separate, so surface detail never changes the tree's shape
   const renderer = createRenderer(canvas);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
@@ -57,29 +57,32 @@ function init() {
   scene.add(plant);
 
   /* ---------- Pot ---------- */
+  // Profile with softly rounded corners (bottom edge and rim), turned on a lathe
   const profile = [
-    [0, 0], [0.62, 0], [0.7, 0.08], [0.82, 1.0], [0.95, 1.02], [0.98, 1.25], [0.88, 1.27], [0.86, 1.12], [0, 1.12],
+    [0, 0], [0.6, 0], [0.66, 0.015], [0.695, 0.06], [0.705, 0.1], [0.82, 0.99], [0.84, 1.01], [0.93, 1.02], [0.955, 1.04],
+    [0.975, 1.2], [0.965, 1.24], [0.935, 1.265], [0.89, 1.265], [0.87, 1.24], [0.86, 1.12], [0, 1.12],
   ].map(([x, y]) => new THREE.Vector2(x, y));
-  const pot = mesh(new THREE.LatheGeometry(profile, 12), mat(C.pot));
+  const pot = mesh(new THREE.LatheGeometry(profile, 48), mat(C.pot));
   plant.add(pot);
-  const band = mesh(new THREE.CylinderGeometry(0.9, 0.88, 0.06, 12, 1, true), mat(C.potDark, { side: THREE.DoubleSide }));
-  band.position.y = 0.9;
-  plant.add(band);
-  const soil = mesh(jitter(new THREE.CylinderGeometry(0.86, 0.86, 0.06, 12, 1), 0.02, rand), mat(C.soil));
+  const soilGeo = mergeVertices(new THREE.CylinderGeometry(0.86, 0.86, 0.06, 48, 1).deleteAttribute('normal').deleteAttribute('uv'));
+  const soil = mesh(jitter(soilGeo, 0.012, surfaceRand), mat(C.soil));
   soil.position.y = 1.14;
   plant.add(soil);
   const SOIL_Y = 1.17;
 
   // A seed that disappears as the sprout appears.
-  const seed = mesh(new THREE.IcosahedronGeometry(0.09, 0), mat(0x8a6234));
+  const seed = mesh(new THREE.IcosahedronGeometry(0.09, 2), mat(0x8a6234));
   seed.scale.set(1, 0.7, 1);
   seed.position.set(0.05, SOIL_Y + 0.03, 0.1);
   plant.add(seed);
 
   /* ---------- Procedural tree ---------- */
   const growables = []; // { object, start, duration, kind }
-  const leafGeo = new THREE.IcosahedronGeometry(1, 0);
-  const leafMat = mat(0xffffff, { vertexColors: true });
+  // A soft, slightly lumpy ball of foliage: a subdivided sphere with shared (welded) vertices,
+  // nudged a little so each lump catches the light differently. Smooth normals, no facets.
+  // Phones and tablets get a lighter ball (80 instead of 320 triangles) – still smooth thanks to the shading.
+  const leafGeo = jitter(mergeVertices(new THREE.IcosahedronGeometry(1, lowPower ? 1 : 2).deleteAttribute('normal').deleteAttribute('uv')), 0.09, surfaceRand);
+  const leafMat = mat(0xffffff, { vertexColors: true, roughness: 0.75 });
   const placer = new THREE.Object3D();
 
   const addLeafCluster = (parent, y, start, size) => {
@@ -104,7 +107,7 @@ function init() {
 
     // Blossoms arrive in the final "nurture" stage.
     for (let i = 0; i < 2; i++) {
-      const blossom = mesh(new THREE.IcosahedronGeometry(0.055, 0), mat(rand.pick(C.blossoms), { roughness: 0.5 }));
+      const blossom = mesh(new THREE.IcosahedronGeometry(0.055, 1), mat(rand.pick(C.blossoms), { roughness: 0.5 }));
       blossom.position.set(rand.range(-0.35, 0.35) * size * 2, rand.range(0.1, 0.45) * size * 2, rand.range(-0.35, 0.35) * size * 2);
       cluster.add(blossom);
       growables.push({ object: blossom, start: rand.range(0.8, 0.93), duration: 0.08, kind: 'pop' });
@@ -113,7 +116,7 @@ function init() {
 
   const makeBranch = (depth, length, radius, start) => {
     const branch = new THREE.Group();
-    const geo = new THREE.CylinderGeometry(radius * 0.62, radius, length, 6);
+    const geo = new THREE.CylinderGeometry(radius * 0.62, radius, length, 12);
     geo.translate(0, length / 2, 0);
     branch.add(mesh(geo, mat(C.bark)));
     const duration = depth === 0 ? 0.3 : 0.16;
@@ -143,7 +146,7 @@ function init() {
   // Two baby leaves for the sprout stage, which fall away as the tree matures.
   const sprout = new THREE.Group();
   [-1, 1].forEach((side) => {
-    const leaf = mesh(new THREE.SphereGeometry(0.16, 6, 4), mat(C.leaves[1]));
+    const leaf = mesh(new THREE.SphereGeometry(0.16, 16, 10), mat(C.leaves[1]));
     leaf.scale.set(1, 0.25, 0.55);
     leaf.position.x = side * 0.15;
     leaf.rotation.z = side * 0.5;
@@ -153,7 +156,7 @@ function init() {
 
   /* ---------- Falling petals for the final stage ---------- */
   const petals = Array.from({ length: 14 }, () => {
-    const petal = new THREE.Mesh(new THREE.CircleGeometry(0.05, 5), new THREE.MeshStandardMaterial({ color: rand.pick(C.blossoms), side: THREE.DoubleSide }));
+    const petal = new THREE.Mesh(new THREE.CircleGeometry(0.05, 10),new THREE.MeshStandardMaterial({ color: rand.pick(C.blossoms), side: THREE.DoubleSide }));
     petal.userData = { x: rand.range(-1.8, 1.8), z: rand.range(-1.2, 1.2), speed: rand.range(0.25, 0.5), phase: rand() * 10 };
     scene.add(petal);
     return petal;
@@ -183,8 +186,9 @@ function init() {
     sprout.visible = sproutT > 0.01;
   };
 
-  runWhenVisible(canvas, renderer, camera, (t) => {
-    progress += (target - progress) * 0.08;
+  runWhenVisible(canvas, renderer, camera, (t, delta) => {
+    // Ease towards the scroll position at the same pace on 60 Hz and 120 Hz screens
+    progress += (target - progress) * (1 - Math.exp(-5 * delta));
     apply(progress);
 
     // Camera eases out as the tree gets taller.

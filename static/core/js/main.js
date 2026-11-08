@@ -668,6 +668,23 @@
         scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 50%', scrub: true },
       });
     });
+  } else {
+    /* ---------- Same effect on phones, lighter: scrolling only switches words on or off
+       (a class), and a short CSS fade does the brightening. Per scrolled frame just the
+       few words that change are touched, instead of re-styling every word. ---------- */
+    $$('[data-scrub-text]').forEach((el) => {
+      const words = splitWords(el, false);
+      el.classList.add('is-scrub-lit');
+      let lit = 0;
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', end: 'bottom 55%',
+        onUpdate: ({ progress }) => {
+          const target = Math.round(progress * words.length);
+          for (; lit < target; lit++) words[lit].classList.add('is-lit');
+          for (; lit > target; lit--) words[lit - 1].classList.remove('is-lit');
+        },
+      });
+    });
   }
 
   /* ---------- Generic fade-up reveals ---------- */
@@ -699,12 +716,12 @@
   // card is scrolled or drifts into view from the side.
   fadeUp($$('.services__row.is-marquee').length ? '.services__row' : '.service-card');
   fadeUp('.reviews__rail');
-  fadeUp('.contact__ticks li, .contact-tile');
+  fadeUp('.contact__ticks li, .contact-tile, .contact__hours');
   // On phones the step cards sit in a sideways row inside the sticky panel – no reveal there
   if (!lightMotion) fadeUp('.process__step');
   fadeUp('.band .btn');
-  // Phones: headings and the About paragraph rise in as whole blocks (see lightMotion above)
-  if (lightMotion) fadeUp('[data-split]:not(.hero__title), [data-scrub-text]');
+  // Phones: headings rise in as whole blocks (see lightMotion above); the About paragraph lights up word by word
+  if (lightMotion) fadeUp('[data-split]:not(.hero__title)');
 
   /* ---------- Gallery images: simple pop-in ---------- */
   // Photos start hidden (so none flash fully visible before their turn) and each one
@@ -735,15 +752,6 @@
       imageReady(img).then(() => reveal(item, index * 0.08));
     }),
   });
-
-  /* ---------- Footer wordmark: letters rise in as you reach the bottom ---------- */
-  const wordmarkLetters = $$('[data-wordmark-text] span');
-  if (wordmarkLetters.length) {
-    gsap.fromTo(wordmarkLetters, { yPercent: 100, opacity: 0 }, {
-      yPercent: 0, opacity: 1, ease: 'power2.out', stagger: 0.06,
-      scrollTrigger: { trigger: '[data-wordmark]', start: 'top bottom', end: 'max', scrub: 0.6 }, // fully risen at the very bottom
-    });
-  }
 
   /* ---------- Counters ---------- */
   $$('[data-count]').forEach((el) => {
